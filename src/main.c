@@ -14,6 +14,7 @@ void	free_game(t_game *game)
 		if (game->textures.w_texture)
 			mlx_delete_image(game->mlx, game->textures.w_texture);
 		free_map(game->map);
+		free(game);
 	}
 }
 
@@ -95,7 +96,7 @@ t_game	*initGame()
 	};
 
 	game = malloc(sizeof(t_game));
-	game->mlx = mlx_init(980, 720, "cub3D", true);
+	//game->mlx = mlx_init(980, 720, "cub3D", true);
 	game->map = malloc(sizeof(char *) * 6);
 	i = 0;
 	while (raw_map[i])
@@ -128,9 +129,10 @@ int	main(int argc, char **argv)
 	(void)argc;
 	game = initGame();
 	print_map(game->map);
+	free_game(game);
 	
 	//mlx_key_hook(game->mlx, move_player, game);
-	mlx_close_hook(game->mlx, (mlx_closefunc)free_game, game);
+	//mlx_close_hook(game->mlx, (mlx_closefunc)free_game, game);
 	//mlx_loop_hook(game->mlx, animate_wall, game);
 	//mlx_loop(game->mlx);
 }
