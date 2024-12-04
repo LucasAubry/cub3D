@@ -1,7 +1,7 @@
 #-----------------------Flags_and_Name---------------------
 NAME	=	cub3D
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -Iinclude -g
+CFLAGS	=	-Wall -Wextra -Werror -Iinclude -Ilib/inc -g
 CREAD	=	-lreadline -lncursesw
 LIB			=	lib
 LIBFT		=	$(LIB)/libft.a
