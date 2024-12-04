@@ -2,7 +2,8 @@
 NAME	=	cub3D
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -Iinclude -g
-CREAD	=	-lreadline -lncursesw -Imlx
+CREAD	=	-lreadline -lncursesw
+LIBS	=	-Llib -lmlx_Linux -lXext -lX11 -lm
 
 #------------------------Source-----------------------------
 
@@ -20,7 +21,7 @@ print(''.join(['\033[38;5;' + str(random.randint(16, 255)) + 'm' + c + '\033[0m'
 endef
 
 #------------------------Rules------------------------------
-VALGRIND_SUPP = valgrind.supp
+#VALGRIND_SUPP = valgrind.supp
 
 all:	${NAME}
 
@@ -28,11 +29,11 @@ obj:
 	mkdir -p obj
 
 .c.o:
-		$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) $(CREAD)
+		$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) $(CREAD) $(LIBS)
 
 $(NAME): obj ${OBJS}
-		@$(call generate_random_color, $(CC) $(CFLAGS) -o $@ $(OBJS))
-		@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(CREAD)
+		@$(call generate_random_color, $(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBS))
+		@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(CREAD) $(LIBS)
 
 
 obj/%.o: src/%.c
