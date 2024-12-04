@@ -4,6 +4,8 @@ CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -Iinclude -g
 CREAD	=	-lreadline -lncursesw
 LIBS	=	-Llib -lmlx_Linux -lXext -lX11 -lm
+LIB			=	lib
+LIBFT		=	$(LIB)/libft.a
 
 #------------------------Source-----------------------------
 
@@ -11,7 +13,8 @@ LIBS	=	-Llib -lmlx_Linux -lXext -lX11 -lm
 FILES = main \
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
-OBJS = $(addprefix obj/, $(addsuffix .o, $(FILES)))
+OBJS = $(addprefix obj/, $(addsuffix .o, $(FILES)))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
 
 #------------------------Colors-----------------------------
 
@@ -23,10 +26,14 @@ endef
 #------------------------Rules------------------------------
 #VALGRIND_SUPP = valgrind.supp
 
-all:	${NAME}
+all: $(LIBFT) ${NAME}
 
 obj:
 	mkdir -p obj
+
+$(LIBFT):
+	@$(MAKE) --quiet -C $(LIB)
+	@echo "Libft compilée."
 
 .c.o:
 		$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) $(CREAD) $(LIBS)
@@ -44,9 +51,11 @@ valgrind: $(NAME)
 	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes --track-fds=yes --trace-children=yes --suppressions=$(VALGRIND_SUPP) ./$(NAME)
 
 clean:
+		@$(MAKE) --quiet -C $(LIB) clean
 		rm -f ${OBJS}
 
 fclean:	clean
+		@$(MAKE) --quiet -C $(LIB) fclean
 		rm -f ${NAME}
 		rm -rf obj
 
