@@ -7,6 +7,7 @@ LIB			=	lib
 LIBFT		=	$(LIB)/libft.a
 MLX			=	MLX42
 LIBMLX 	=	$(MLX)/build/libmlx42.a
+LIBS = $(LIBFT) $(LIBMLX) -lglfw -pthread -lm
 
 #------------------------Source-----------------------------
 

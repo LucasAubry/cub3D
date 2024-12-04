@@ -3,7 +3,7 @@
 
 /* ========== INCLUDE ============= */
 
-#include "mlx.h"
+#include "MLX42.h"
 #include "stdio.h"
 #include "unistd.h"
 #include "string.h"
