@@ -13,6 +13,7 @@ LIBS = $(LIBFT) $(LIBMLX) -lglfw -pthread -lm
 
 # Sources and objects
 FILES = main \
+		verif \
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix obj/, $(addsuffix .o, $(FILES)))
