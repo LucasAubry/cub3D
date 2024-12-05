@@ -1,7 +1,7 @@
 #-----------------------Flags_and_Name---------------------
 NAME	=	cub3D
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -Iinclude -Ilib/inc -g
+CFLAGS	=	-Wall -Wextra -Werror -Iinclude -Ilib/inc -IMLX42/include -g
 CREAD	=	-lreadline -lncursesw
 LIB			=	lib
 LIBFT		=	$(LIB)/libft.a
@@ -12,7 +12,7 @@ LIBS = $(LIBFT) $(LIBMLX) -lglfw -pthread -lm
 #------------------------Source-----------------------------
 
 # Sources and objects
-FILES = main \
+FILES = main init\
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix obj/, $(addsuffix .o, $(FILES)))

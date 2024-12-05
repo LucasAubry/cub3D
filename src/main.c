@@ -98,49 +98,10 @@ mlx_image_t	*load_image(mlx_t *mlx, const char *path)
 	return (image);
 }
 
-t_game	*initGame(void)
-{
-	t_game	*game;
-	int		i;
-	char	*raw_map[] = {"1111111111\0", "1000000001\0", "1011111101\0",
-			"100N000001\0", "1111111111\0", NULL};
-
-	game = malloc(sizeof(t_game));
-	game->mlx = mlx_init(980, 720, "cub3D", false);
-	game->map = malloc(sizeof(char *) * 6);
-	i = 0;
-	while (raw_map[i])
-	{
-		game->map[i] = ft_strdup(raw_map[i]);
-		i++;
-	}
-	game->map[i] = NULL;
-	game->textures.n_texture = load_image(game->mlx, "img/blue_wall.png");
-	game->textures.s_texture = load_image(game->mlx, "img/purple_wall.png");
-	game->textures.e_texture = load_image(game->mlx, "img/grey_wall.png");
-	game->textures.w_texture = load_image(game->mlx, "img/yellow_wall.png");
-	return (game);
-}
-
-void	printMap(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		ft_printf("%s\n", map[i]);
-		i++;
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	t_game	*game;
 
-	// double posX = 3, posY = 3;        // x and y start position
-	// double dirX = -1, dirY = 0;       // initial direction vector
-	// double planeX = 0, planeY = 0.66;
 	// 	// the 2d raycaster version of camera plane
 	// double time = 0;                  // time of current frame
 	// double oldTime = 0;               // time of previous frame
@@ -152,5 +113,5 @@ int	main(int argc, char **argv)
 	// mlx_key_hook(game->mlx, move_player, game);
 	// mlx_close_hook(game->mlx, (mlx_closefunc)free_game, game);
 	// mlx_loop_hook(game->mlx, animate_wall, game);
-	// mlx_loop(game->mlx);
+	mlx_loop(game->mlx);
 }

@@ -1,14 +1,15 @@
-#ifndef CUB3D_H
-# define CUB3D_H
+#pragma once
 
 /* ========== INCLUDE ============= */
 
-# include "MLX42.h"
-# include "stdio.h"
-# include "stdlib.h"
-# include "string.h"
-# include "unistd.h"
-# include <stdint.h>
+#include "exec.h"
+#include "libft.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
+#include "unistd.h"
+#include "MLX42/MLX42.h"
+#include <stdint.h>
 
 /* ========== ENUM ================ */
 
@@ -25,10 +26,10 @@ typedef struct s_color
 // Structure pour les textures
 typedef struct s_textures
 {
-	mlx_image_t		*n_texture;
-	mlx_image_t		*s_texture;
-	mlx_image_t		*w_texture;
-	mlx_image_t		*e_texture;
+	mlx_image_t	*n_texture;
+	mlx_image_t	*s_texture;
+	mlx_image_t	*w_texture;
+	mlx_image_t	*e_texture;
 }				t_textures;
 
 typedef struct s_game
@@ -41,14 +42,16 @@ typedef struct s_game
 	char		**map;
 	int			map_width;
 	int			map_height;
-	int			p_start_x;
-	int			p_start_y;
-	char		p_direction;
-	void		*mlx;
+	double pos_x;   // Position actuelle X du joueur
+	double pos_y;   // Position actuelle Y du joueur
+	double dir_x;   // Direction actuelle X du joueur
+	double dir_y;   // Direction actuelle Y du joueur
+	double plane_x; // Plan de caméra X (pour définir le FOV)
+	double plane_y; // Plan de caméra Y (pour définir le FOV)
+	mlx_image_t	*screen;
+	mlx_t		*mlx;
 }				t_game;
 
 /* ========== ERROR ================*/
 
 /* ========== FONCTION ============ */
-
-#endif
