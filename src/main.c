@@ -82,26 +82,29 @@
 // 	}
 // }
 
-// void	move_player(mlx_key_data_t keydata, void *param)
-// {
-// 	t_game	*game;
-// 	double	moveSpeed;
+void	handle_input(mlx_key_data_t keydata, void *param)
+{
+	t_game	*game;
 
-// 	game = (t_game *)param;
-// 	moveSpeed = 0.1;
-// 	double newPosX, newPosY;
-// 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-// 	{
-// 		newPosX = game->pos_x + game->dir_x * moveSpeed;
-// 		newPosY = game->pos_y + game->dir_y * moveSpeed;
-// 		if (game->map[(int)newPosY][(int)game->pos_x] != '1')
-// 			game->pos_y = newPosY;
-// 		if (game->map[(int)game->pos_y][(int)newPosX] != '1')
-// 			game->pos_x = newPosX;
-// 	}
-// 	// Ajoutez les autres contrôles (S, A, D) ici pour reculer ou tourner
-// }
-
+	game = (t_game *)param;
+	// Exemple avec MLX42, où vous utilisez peut-être mlx_is_key_down
+	// Ajustez les clés selon vos préférences (W, A, S, D par exemple)
+	if (keydata.key == MLX_KEY_W)
+			move_forward(game);
+		if (keydata.key == MLX_KEY_S)
+			move_backward(game);
+		if (keydata.key == MLX_KEY_A)
+			move_left(game);
+		if (keydata.key == MLX_KEY_D)
+			move_right(game);
+		if (keydata.key == MLX_KEY_LEFT)
+			rotate_player(game, -ROT_SPEED); // Tourner à gauche
+		if (keydata.key == MLX_KEY_RIGHT)
+			rotate_player(game, ROT_SPEED); // Tourner à droite
+		// Après avoir mis à jour la position/direction du joueur,
+		// redessinez la scène
+		render_frame(game);
+}
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -110,7 +113,7 @@ int	main(int argc, char **argv)
 	(void)argc;
 	game = initGame();
 	print_map(game->map);
-	// mlx_key_hook(game->mlx, move_player, game);
+	mlx_key_hook(game->mlx, handle_input, game);
 	// mlx_close_hook(game->mlx, (mlx_closefunc)free_game, game);
 	mlx_loop_hook(game->mlx, render_frame, game);
 	mlx_loop(game->mlx);

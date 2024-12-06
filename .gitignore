@@ -1,4 +1,5 @@
 *swp
-.a
-.o
+*.a
+*.o
 MLX42/
+cub3D

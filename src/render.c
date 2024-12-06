@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:12:45 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/06 17:27:06 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:01:54 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	render_frame(void *param)
 {
-	t_game	*game;
-	int		x;
+	t_game		*game;
+	int			x;
 
 	game = (t_game *)param;
 	x = 0;
