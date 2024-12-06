@@ -98,9 +98,9 @@ void	handle_input(mlx_key_data_t keydata, void *param)
 		if (keydata.key == MLX_KEY_D)
 			move_right(game);
 		if (keydata.key == MLX_KEY_LEFT)
-			rotate_player(game, -ROT_SPEED); // Tourner à gauche
+			rotate_player(game, ROT_SPEED); // Tourner à gauche
 		if (keydata.key == MLX_KEY_RIGHT)
-			rotate_player(game, ROT_SPEED); // Tourner à droite
+			rotate_player(game, -ROT_SPEED); // Tourner à droite
 		// Après avoir mis à jour la position/direction du joueur,
 		// redessinez la scène
 		render_frame(game);

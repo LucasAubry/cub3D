@@ -15,8 +15,8 @@
 #define HEIGHT 720
 #define T_WIDTH 64
 #define T_HEIGHT 64
-#define MOVE_SPEED 0.05
-#define ROT_SPEED 0.05
+#define MOVE_SPEED 0.08
+#define ROT_SPEED 0.08
 
 /* ========== ENUM ================ */
 
@@ -74,7 +74,7 @@ typedef struct s_ray
 	double deltadist_x; // Distance entre deux côtés verticaux de la grille
 	double deltadist_y; // Distance entre deux côtés horizontaux de la grille
 	double wall_dist;   // Distance perpendiculaire du joueur au mur touché
-	int side;           // Indique quel côté du mur a été touché (0 pour x, 1 pour y)
+	int side;           // Indique quel côté du mur a été touché
 }					t_ray;
 
 // Structure principale contenant les informations du jeu
@@ -97,7 +97,7 @@ typedef struct s_game
 /* ========== FONCTION ============ */
 
 // main.c
-void	handle_input(mlx_key_data_t keydata, void *param);
+void				handle_input(mlx_key_data_t keydata, void *param);
 
 // init.c
 t_game				*initGame(void);
@@ -111,7 +111,7 @@ void				initRay(t_game *game);
 t_draw_limits		calculate_draw_limits(int line_height);
 void				draw_wall_line(t_game *game, int x, int line_height,
 						int tex_x);
-void	draw_floor_and_ceiling(t_game *game);
+void				draw_floor_and_ceiling(t_game *game);
 
 // raycasting.c
 void				calculate_ray_direction(t_game *game, int x);
@@ -123,16 +123,18 @@ void				calculate_wall_distance(t_game *game, int *line_height,
 // render.c
 void				render_frame(void *param);
 void				render_column(t_game *game, int x);
+void				printData(t_game *game);
 
 // texture.c
 mlx_texture_t		*select_texture(t_game *game);
 uint32_t			get_texture_color(mlx_texture_t *texture, int tex_x,
 						int tex_y);
-uint32_t	rgb_to_rgba(unsigned char r, unsigned char g, unsigned char b);
+uint32_t			rgb_to_rgba(unsigned char r, unsigned char g,
+						unsigned char b);
 
 // move.c
-void	rotate_player(t_game *game, double angle);
-void	move_forward(t_game *game);
-void	move_backward(t_game *game);
-void	move_left(t_game *game);
-void	move_right(t_game *game);
+void				rotate_player(t_game *game, double angle);
+void				move_forward(t_game *game);
+void				move_backward(t_game *game);
+void				move_left(t_game *game);
+void				move_right(t_game *game);

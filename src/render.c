@@ -6,11 +6,16 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:12:45 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/06 18:25:24 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/06 20:06:22 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+void	printData(t_game *game)
+{
+	printf("pos_x : %lf | pos_y : %lf | dir_x : %lf | dir_y : %lf | plane_x : %lf | plane_y : %lf\n", game->player.pos_x, game->player.pos_y, game->player.dir_x, game->player.dir_y, game->player.plane_x, game->player.plane_y);
+	printf("ray.dir_x : %lf | ray.dir_y : %lf\n", game->ray.dir_x, game->ray.dir_y);
+}
 
 void	render_frame(void *param)
 {
@@ -26,6 +31,7 @@ void	render_frame(void *param)
 		x++;
 	}
 	// Afficher l'image
+	printData(game);
 	mlx_image_to_window(game->mlx, game->screen, 0, 0);
 }
 

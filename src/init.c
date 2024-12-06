@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:33 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/06 18:27:52 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/06 20:18:18 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ t_game	*initGame(void)
 	t_game	*game;
 
 	game = malloc(sizeof(t_game));
-	initPlayer(game);
 	initMap(game);
+	initPlayer(game);
 	initTextures(game);
 	initRay(game);
 	return (game);
@@ -26,12 +26,54 @@ t_game	*initGame(void)
 
 void	initPlayer(t_game *game)
 {
-	game->player.pos_x = 4.5;
-	game->player.pos_y = 1.8;
-	game->player.dir_x = -1;
-	game->player.dir_y = 0;
-	game->player.plane_x = 0;
-	game->player.plane_y = 0.66;
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (game->map[y])
+	{
+		while (game->map[y][x] != '\0')
+		{
+			if (game->map[y][x] == 'N' || game->map[y][x] == 'S'
+				|| game->map[y][x] == 'W' || game->map[y][x] == 'E')
+			{
+				game->player.pos_x = x + 0.5;
+				game->player.pos_y = y + 0.5;
+			}
+			if (game->map[y][x] == 'N')
+			{
+				game->player.dir_x = 0;
+				game->player.dir_y = -1;
+				game->player.plane_x = 0.66;
+				game->player.plane_y = 0;
+			}
+			if (game->map[y][x] == 'S')
+			{
+				game->player.dir_x = 0;
+				game->player.dir_y = 1;
+				game->player.plane_x = -0.66;
+				game->player.plane_y = 0;
+			}
+			if (game->map[y][x] == 'W')
+			{
+				game->player.dir_x = -1;
+				game->player.dir_y = 0;
+				game->player.plane_x = 0;
+				game->player.plane_y = 0.66;
+			}
+			if (game->map[y][x] == 'E')
+			{
+				game->player.dir_x = 1;
+				game->player.dir_y = 0;
+				game->player.plane_x = 0;
+				game->player.plane_y = -0.66;
+			}
+			x++;
+		}
+		y++;
+		x = 0;
+	}
 }
 
 void	initMap(t_game *game)
@@ -60,7 +102,6 @@ void	initTextures(t_game *game)
 	game->floor_color.r = 20;
 	game->floor_color.g = 20;
 	game->floor_color.b = 20;
-
 	game->textures.n = mlx_load_png("img/blue_wall.png");
 	game->textures.s = mlx_load_png("img/purple_wall.png");
 	game->textures.e = mlx_load_png("img/grey_wall.png");
