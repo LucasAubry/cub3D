@@ -97,7 +97,7 @@ typedef struct s_game
 /* ========== FONCTION ============ */
 
 // main.c
-void				handle_input(mlx_key_data_t keydata, void *param);
+void				handle_input(void *param);
 
 // init.c
 t_game				*initGame(void);

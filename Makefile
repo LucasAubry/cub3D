@@ -57,7 +57,7 @@ obj/%.o: src/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 valgrind: $(NAME)
-	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes --track-fds=yes --trace-children=yes ./$(NAME)
+	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes --track-fds=yes --trace-children=yes --suppressions=mlx42.supp ./$(NAME)
 
 clean:
 	@$(MAKE) --quiet -C $(LIB) clean
