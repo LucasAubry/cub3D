@@ -18,20 +18,20 @@
 // 	}
 // }
 
-void	free_map(char **map)
-{
-	int	i;
+// void	free_map(char **map)
+// {
+// 	int	i;
 
-	if (!map)
-		return ;
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
+// 	if (!map)
+// 		return ;
+// 	i = 0;
+// 	while (map[i])
+// 	{
+// 		free(map[i]);
+// 		i++;
+// 	}
+// 	free(map);
+// }
 
 // void	move_player(mlx_key_data_t keydata, void *param)
 // {
@@ -101,148 +101,6 @@ void	free_map(char **map)
 // 	}
 // 	// Ajoutez les autres contrôles (S, A, D) ici pour reculer ou tourner
 // }
-
-void	render_frame(void *param)
-{
-	t_game		*game;
-	int			x;
-	int			hit;
-	int			line_height;
-	int			draw_start;
-	int			draw_end;
-	double		wall_x;
-	int			tex_x;
-	int			d;
-	int			tex_y;
-	uint32_t	color;
-	mlx_texture_t *texture;
-
-	game = (t_game *)param;
-	x = 0;
-	while (x < WIDTH)
-	{
-		// Calculer la position de la caméra pour chaque rayon
-		game->ray.camera_x = 2 * x / (double)WIDTH - 1;
-		game->ray.dir_x = game->player.dir_x + game->player.plane_x
-			* game->ray.camera_x;
-		game->ray.dir_y = game->player.dir_y + game->player.plane_y
-			* game->ray.camera_x;
-		// Définir la position actuelle sur la carte
-		game->ray.map_x = (int)game->player.pos_x;
-		game->ray.map_y = (int)game->player.pos_y;
-		// Calculer la distance entre les côtés
-		game->ray.deltadist_x = fabs(1 / game->ray.dir_x);
-		game->ray.deltadist_y = fabs(1 / game->ray.dir_y);
-		// Calculer la direction du pas (step) et la distance initiale au premier côté
-		if (game->ray.dir_x < 0)
-		{
-			game->ray.step_x = -1;
-			game->ray.sidedist_x = (game->player.pos_x - game->ray.map_x)
-				* game->ray.deltadist_x;
-		}
-		else
-		{
-			game->ray.step_x = 1;
-			game->ray.sidedist_x = (game->ray.map_x + 1.0 - game->player.pos_x)
-				* game->ray.deltadist_x;
-		}
-		if (game->ray.dir_y < 0)
-		{
-			game->ray.step_y = -1;
-			game->ray.sidedist_y = (game->player.pos_y - game->ray.map_y)
-				* game->ray.deltadist_y;
-		}
-		else
-		{
-			game->ray.step_y = 1;
-			game->ray.sidedist_y = (game->ray.map_y + 1.0 - game->player.pos_y)
-				* game->ray.deltadist_y;
-		}
-		// Exécuter l'algorithme DDA pour trouver le mur
-		hit = 0;
-		while (hit == 0)
-		{
-			// Avancer au prochain carré de la grille
-			if (game->ray.sidedist_x < game->ray.sidedist_y)
-			{
-				game->ray.sidedist_x += game->ray.deltadist_x;
-				game->ray.map_x += game->ray.step_x;
-				game->ray.side = 0; // Mur vertical touché
-			}
-			else
-			{
-				game->ray.sidedist_y += game->ray.deltadist_y;
-				game->ray.map_y += game->ray.step_y;
-				game->ray.side = 1; // Mur horizontal touché
-			}
-			// Vérifier si le rayon a touché un mur
-			if (game->map[game->ray.map_y][game->ray.map_x] == '1')
-				// Note: [map_y][map_x] est l'ordre correct pour accéder à la carte
-				hit = 1;
-		}
-		// Calculer la distance perpendiculaire au mur
-		if (game->ray.side == 0)
-			game->ray.wall_dist = (game->ray.map_x - game->player.pos_x + (1
-						- game->ray.step_x) / 2) / game->ray.dir_x;
-		else
-			game->ray.wall_dist = (game->ray.map_y - game->player.pos_y + (1
-						- game->ray.step_y) / 2) / game->ray.dir_y;
-		// Calculer wall_x
-		if (game->ray.side == 0)
-			wall_x = game->player.pos_y + game->ray.wall_dist * game->ray.dir_y;
-		else
-			wall_x = game->player.pos_x + game->ray.wall_dist * game->ray.dir_x;
-		// On ne garde que la partie décimale pour le côté de la texture
-		wall_x -= floor(wall_x);
-		tex_x = (int)(wall_x * (double)T_WIDTH);
-		if (game->ray.side == 0 && game->ray.dir_x > 0)
-			tex_x = T_WIDTH - tex_x - 1;
-		if (game->ray.side == 1 && game->ray.dir_y < 0)
-			tex_x = T_WIDTH - tex_x - 1;
-		// Calculer la hauteur de la ligne à dessiner sur l'écran
-		line_height = (int)(HEIGHT / game->ray.wall_dist);
-		// Calculer les points de début et de fin pour la ligne à dessiner
-		draw_start = -line_height / 2 + HEIGHT / 2;
-		if (draw_start < 0)
-			draw_start = 0;
-		draw_end = line_height / 2 + HEIGHT / 2;
-		if (draw_end >= HEIGHT)
-			draw_end = HEIGHT - 1;
-		// Dessiner la ligne verticale pour représenter le mur
-		for (int y = draw_start; y < draw_end; y++)
-		{
-			d = y * 256 - HEIGHT * 128 + line_height * 128;
-			tex_y = ((d * T_HEIGHT) / line_height) / 256;
-			// Sélection de la texture en fonction du mur touché
-			if (game->ray.side == 0 && game->ray.dir_x > 0)
-				texture = game->textures.e;
-			else if (game->ray.side == 0 && game->ray.dir_x < 0)
-				texture = game->textures.w;
-			else if (game->ray.side == 1 && game->ray.dir_y > 0)
-				texture = game->textures.s;
-			else
-				texture = game->textures.n;
-			// Calcul de la position dans la texture
-			if (texture)
-			{
-				int tex_offset = (tex_y * texture->width + tex_x) * 4;
-					// Chaque pixel = 4 bytes (RGBA)
-				color = (texture->pixels[tex_offset] << 24) | (texture->pixels[tex_offset
-						+ 1] << 16) | (texture->pixels[tex_offset
-						+ 2] << 8) | (texture->pixels[tex_offset + 3]);
-			}
-			else
-			{
-				color = 0xFFFFFFFF; // Blanc par défaut en cas d'échec
-			}
-			// Dessiner le pixel avec la couleur de la texture
-			mlx_put_pixel(game->screen, x, y, color);
-		}
-		x++;
-	}
-	// Afficher l'image
-	mlx_image_to_window(game->mlx, game->screen, 0, 0);
-}
 
 int	main(int argc, char **argv)
 {
