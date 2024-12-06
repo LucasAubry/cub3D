@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: damdam <damdam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:33 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/06 03:17:33 by damdam           ###   ########.fr       */
+/*   Updated: 2024/12/06 16:46:55 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	initMap(t_game *game)
 
 void	initTextures(t_game *game)
 {
-	game->textures.n_texture = load_image(game->mlx, "img/blue_wall.png");
-	game->textures.s_texture = load_image(game->mlx, "img/purple_wall.png");
-	game->textures.e_texture = load_image(game->mlx, "img/grey_wall.png");
-	game->textures.w_texture = load_image(game->mlx, "img/yellow_wall.png");
+	game->textures.n = mlx_load_png("img/blue_wall.png");
+	game->textures.s = mlx_load_png("img/purple_wall.png");
+	game->textures.e = mlx_load_png("img/grey_wall.png");
+	game->textures.w = mlx_load_png("img/yellow_wall.png");
 }
 
 void	initRay(t_game *game)

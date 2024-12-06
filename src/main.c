@@ -1,22 +1,22 @@
 #include "cub3d.h"
 #include "libft.h"
 
-void	free_game(t_game *game)
-{
-	if (game)
-	{
-		if (game->textures.n_texture)
-			mlx_delete_image(game->mlx, game->textures.n_texture);
-		if (game->textures.s_texture)
-			mlx_delete_image(game->mlx, game->textures.s_texture);
-		if (game->textures.e_texture)
-			mlx_delete_image(game->mlx, game->textures.e_texture);
-		if (game->textures.w_texture)
-			mlx_delete_image(game->mlx, game->textures.w_texture);
-		free_map(game->map);
-		free(game);
-	}
-}
+// void	free_game(t_game *game)
+// {
+// 	if (game)
+// 	{
+// 		if (game->textures.n_img)
+// 			mlx_delete_image(game->mlx, game->textures.n_img);
+// 		if (game->textures.s_img)
+// 			mlx_delete_image(game->mlx, game->textures.s_img);
+// 		if (game->textures.e_img)
+// 			mlx_delete_image(game->mlx, game->textures.e_img);
+// 		if (game->textures.w_img)
+// 			mlx_delete_image(game->mlx, game->textures.w_img);
+// 		free_map(game->map);
+// 		free(game);
+// 	}
+// }
 
 void	free_map(char **map)
 {
@@ -82,22 +82,6 @@ void	free_map(char **map)
 // 	}
 // }
 
-mlx_image_t	*load_image(mlx_t *mlx, const char *path)
-{
-	mlx_texture_t	*texture;
-	mlx_image_t		*image;
-
-	texture = mlx_load_png(path);
-	if (!texture)
-	{
-		puts("Error: Failed to load texture");
-		return (NULL);
-	}
-	image = mlx_texture_to_image(mlx, texture);
-	mlx_delete_texture(texture);
-	return (image);
-}
-
 // void	move_player(mlx_key_data_t keydata, void *param)
 // {
 // 	t_game	*game;
@@ -120,12 +104,18 @@ mlx_image_t	*load_image(mlx_t *mlx, const char *path)
 
 void	render_frame(void *param)
 {
-	t_game	*game;
-	int		x;
-	int		hit;
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
+	t_game		*game;
+	int			x;
+	int			hit;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	double		wall_x;
+	int			tex_x;
+	int			d;
+	int			tex_y;
+	uint32_t	color;
+	mlx_texture_t *texture;
 
 	game = (t_game *)param;
 	x = 0;
@@ -197,6 +187,18 @@ void	render_frame(void *param)
 		else
 			game->ray.wall_dist = (game->ray.map_y - game->player.pos_y + (1
 						- game->ray.step_y) / 2) / game->ray.dir_y;
+		// Calculer wall_x
+		if (game->ray.side == 0)
+			wall_x = game->player.pos_y + game->ray.wall_dist * game->ray.dir_y;
+		else
+			wall_x = game->player.pos_x + game->ray.wall_dist * game->ray.dir_x;
+		// On ne garde que la partie décimale pour le côté de la texture
+		wall_x -= floor(wall_x);
+		tex_x = (int)(wall_x * (double)T_WIDTH);
+		if (game->ray.side == 0 && game->ray.dir_x > 0)
+			tex_x = T_WIDTH - tex_x - 1;
+		if (game->ray.side == 1 && game->ray.dir_y < 0)
+			tex_x = T_WIDTH - tex_x - 1;
 		// Calculer la hauteur de la ligne à dessiner sur l'écran
 		line_height = (int)(HEIGHT / game->ray.wall_dist);
 		// Calculer les points de début et de fin pour la ligne à dessiner
@@ -209,7 +211,32 @@ void	render_frame(void *param)
 		// Dessiner la ligne verticale pour représenter le mur
 		for (int y = draw_start; y < draw_end; y++)
 		{
-			mlx_put_pixel(game->screen, x, y, 0x00FF00FF);
+			d = y * 256 - HEIGHT * 128 + line_height * 128;
+			tex_y = ((d * T_HEIGHT) / line_height) / 256;
+			// Sélection de la texture en fonction du mur touché
+			if (game->ray.side == 0 && game->ray.dir_x > 0)
+				texture = game->textures.e;
+			else if (game->ray.side == 0 && game->ray.dir_x < 0)
+				texture = game->textures.w;
+			else if (game->ray.side == 1 && game->ray.dir_y > 0)
+				texture = game->textures.s;
+			else
+				texture = game->textures.n;
+			// Calcul de la position dans la texture
+			if (texture)
+			{
+				int tex_offset = (tex_y * texture->width + tex_x) * 4;
+					// Chaque pixel = 4 bytes (RGBA)
+				color = (texture->pixels[tex_offset] << 24) | (texture->pixels[tex_offset
+						+ 1] << 16) | (texture->pixels[tex_offset
+						+ 2] << 8) | (texture->pixels[tex_offset + 3]);
+			}
+			else
+			{
+				color = 0xFFFFFFFF; // Blanc par défaut en cas d'échec
+			}
+			// Dessiner le pixel avec la couleur de la texture
+			mlx_put_pixel(game->screen, x, y, color);
 		}
 		x++;
 	}
@@ -226,7 +253,7 @@ int	main(int argc, char **argv)
 	game = initGame();
 	print_map(game->map);
 	// mlx_key_hook(game->mlx, move_player, game);
-	mlx_close_hook(game->mlx, (mlx_closefunc)free_game, game);
+	// mlx_close_hook(game->mlx, (mlx_closefunc)free_game, game);
 	mlx_loop_hook(game->mlx, render_frame, game);
 	mlx_loop(game->mlx);
 }

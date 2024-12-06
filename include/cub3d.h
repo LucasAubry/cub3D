@@ -13,6 +13,9 @@
 
 #define WIDTH 980
 #define HEIGHT 720
+#define T_WIDTH 64
+#define T_HEIGHT 64
+
 /* ========== ENUM ================ */
 
 /* ========== STRUCTURE =========== */
@@ -28,10 +31,10 @@ typedef struct s_color
 // Structure pour les textures
 typedef struct s_textures
 {
-	mlx_image_t	*n_texture;
-	mlx_image_t	*s_texture;
-	mlx_image_t	*w_texture;
-	mlx_image_t	*e_texture;
+	mlx_texture_t	*n;
+	mlx_texture_t	*s;
+	mlx_texture_t	*w;
+	mlx_texture_t	*e;
 }				t_textures;
 
 // Structure pour les informations du joueur
