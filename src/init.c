@@ -6,7 +6,7 @@
 /*   By: damdam <damdam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:33 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/05 16:17:25 by damdam           ###   ########.fr       */
+/*   Updated: 2024/12/06 03:17:33 by damdam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,31 @@ t_game	*initGame(void)
 	t_game	*game;
 
 	game = malloc(sizeof(t_game));
-	initPos(game);
+	initPlayer(game);
 	initMap(game);
-	initImage(game);
+	initTextures(game);
+	initRay(game);
 	return (game);
 }
 
-void	initPos(t_game *game)
+void	initPlayer(t_game *game)
 {
-	game->pos_x = 3;
-	game->pos_y = 3;
-	game->dir_x = -1;
-	game->dir_y = 0;
-	game->plane_x = 0;
-	game->plane_y = 0.66;
+	game->player.pos_x = 4.5;
+	game->player.pos_y = 1.8;
+	game->player.dir_x = -1;
+	game->player.dir_y = 0;
+	game->player.plane_x = 0;
+	game->player.plane_y = 0.66;
 }
 
 void	initMap(t_game *game)
 {
 	int		i;
 	char	*raw_map[] = {"1111111111\0", "1000000001\0", "1011111101\0",
-			"100N000001\0", "1111111111\0", NULL};
+			"100S000001\0", "1111111111\0", NULL};
 
-	game->mlx = mlx_init(980, 720, "cub3D", false);
+	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
+	game->screen = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->map = malloc(sizeof(char *) * 6);
 	i = 0;
 	while (raw_map[i])
@@ -50,7 +52,7 @@ void	initMap(t_game *game)
 	game->map[i] = NULL;
 }
 
-void	initImage(t_game *game)
+void	initTextures(t_game *game)
 {
 	game->textures.n_texture = load_image(game->mlx, "img/blue_wall.png");
 	game->textures.s_texture = load_image(game->mlx, "img/purple_wall.png");
@@ -58,9 +60,26 @@ void	initImage(t_game *game)
 	game->textures.w_texture = load_image(game->mlx, "img/yellow_wall.png");
 }
 
+void	initRay(t_game *game)
+{
+	game->ray.camera_x = 0.0;
+	game->ray.dir_x = game->player.dir_x;
+	game->ray.dir_y = game->player.dir_y;
+	game->ray.map_x = (int)game->player.pos_x;
+	game->ray.map_y = (int)game->player.pos_y;
+	game->ray.step_x = 0;
+	game->ray.step_y = 0;
+	game->ray.sidedist_x = 0.0;
+	game->ray.sidedist_y = 0.0;
+	game->ray.deltadist_x = 0.0;
+	game->ray.deltadist_y = 0.0;
+	game->ray.wall_dist = 0.0;
+	game->ray.side = -1;
+}
+
 void	printMap(char **map)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (map[i])
