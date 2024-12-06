@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:12:45 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/06 18:01:54 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:25:24 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	render_frame(void *param)
 
 	game = (t_game *)param;
 	x = 0;
+	draw_floor_and_ceiling(game);
 	while (x < WIDTH)
 	{
 		render_column(game, x);

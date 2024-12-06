@@ -113,8 +113,9 @@ int	main(int argc, char **argv)
 	(void)argc;
 	game = initGame();
 	print_map(game->map);
+	render_frame(game);
 	mlx_key_hook(game->mlx, handle_input, game);
 	// mlx_close_hook(game->mlx, (mlx_closefunc)free_game, game);
-	mlx_loop_hook(game->mlx, render_frame, game);
+	//mlx_loop_hook(game->mlx, render_frame, game);
 	mlx_loop(game->mlx);
 }

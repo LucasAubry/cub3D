@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:15:17 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/06 17:15:22 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:26:35 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,9 @@ uint32_t	get_texture_color(mlx_texture_t *texture, int tex_x, int tex_y)
 		| (texture->pixels[tex_offset + 2] << 8)
 		| (texture->pixels[tex_offset + 3]);
 	return (color);
+}
+
+uint32_t	rgb_to_rgba(unsigned char r, unsigned char g, unsigned char b)
+{
+	return ((r << 24) | (g << 16) | (b << 8) | 0xFF);
 }

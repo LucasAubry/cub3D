@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:15:45 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/06 17:15:55 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:23:59 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,43 @@ void	draw_wall_line(t_game *game, int x, int line_height, int tex_x)
 	{
 		d = y * 256 - HEIGHT * 128 + line_height * 128;
 		tex_y = ((d * T_HEIGHT) / line_height) / 256;
-		mlx_put_pixel(game->screen, x, y, get_texture_color(texture, tex_x, tex_y));
+		mlx_put_pixel(game->screen, x, y, get_texture_color(texture, tex_x,
+				tex_y));
+		y++;
+	}
+}
+
+void	draw_floor_and_ceiling(t_game *game)
+{
+	int	x;
+	int	y;
+	uint32_t	color;
+
+	color = rgb_to_rgba(game->ceiling_color.r, game->ceiling_color.g, game->ceiling_color.b);
+	printf("color ceiling : %d\n", color);
+	// Dessiner le plafond (moitié supérieure)
+	y = 0;
+	while (y < HEIGHT / 2)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			mlx_put_pixel(game->screen, x, y, color);
+			x++;
+		}
+		y++;
+	}
+	// Dessiner le sol (moitié inférieure)
+	color = rgb_to_rgba(game->floor_color.r, game->floor_color.g, game->floor_color.b);
+	printf("color ceiling : %d\n", color);
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			mlx_put_pixel(game->screen, x, y, color);
+			x++;
+		}
 		y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:33 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/06 16:46:55 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:27:52 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ void	initMap(t_game *game)
 
 void	initTextures(t_game *game)
 {
+	game->ceiling_color.r = 50;
+	game->ceiling_color.g = 50;
+	game->ceiling_color.b = 50;
+	game->floor_color.r = 20;
+	game->floor_color.g = 20;
+	game->floor_color.b = 20;
+
 	game->textures.n = mlx_load_png("img/blue_wall.png");
 	game->textures.s = mlx_load_png("img/purple_wall.png");
 	game->textures.e = mlx_load_png("img/grey_wall.png");

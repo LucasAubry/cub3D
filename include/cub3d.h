@@ -111,6 +111,7 @@ void				initRay(t_game *game);
 t_draw_limits		calculate_draw_limits(int line_height);
 void				draw_wall_line(t_game *game, int x, int line_height,
 						int tex_x);
+void	draw_floor_and_ceiling(t_game *game);
 
 // raycasting.c
 void				calculate_ray_direction(t_game *game, int x);
@@ -127,6 +128,7 @@ void				render_column(t_game *game, int x);
 mlx_texture_t		*select_texture(t_game *game);
 uint32_t			get_texture_color(mlx_texture_t *texture, int tex_x,
 						int tex_y);
+uint32_t	rgb_to_rgba(unsigned char r, unsigned char g, unsigned char b);
 
 // move.c
 void	rotate_player(t_game *game, double angle);
