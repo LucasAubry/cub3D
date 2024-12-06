@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:32:00 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/06 21:38:16 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/06 23:14:05 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,3 +87,4 @@ void	move_right(t_game *game)
 		game->player.pos_y += perp_y * MOVE_SPEED;
 	render_frame(game);
 }
+

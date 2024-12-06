@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:12:45 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/06 21:33:39 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/06 23:53:28 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ void	render_frame(void *param)
 	}
 	//printData(game);
 	ft_printf("%d\n", i);
+	if (i == 0)
+		mlx_image_to_window(game->mlx, game->screen, 0, 0);
 	i++;
-	mlx_image_to_window(game->mlx, game->screen, 0, 0);
 }
 
 void	render_column(t_game *game, int x)

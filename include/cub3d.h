@@ -15,8 +15,8 @@
 #define HEIGHT 720
 #define T_WIDTH 64
 #define T_HEIGHT 64
-#define MOVE_SPEED 0.08
-#define ROT_SPEED 0.08
+#define MOVE_SPEED 0.07
+#define ROT_SPEED 0.07
 
 /* ========== ENUM ================ */
 

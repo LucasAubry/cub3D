@@ -15,9 +15,9 @@ void	handle_input(void *param)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 		move_right(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
-		rotate_player(game, -ROT_SPEED); // Tourner à gauche
+		rotate_player(game, -ROT_SPEED);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
-		rotate_player(game, ROT_SPEED); // Tourner à droite
+		rotate_player(game, ROT_SPEED);
 }
 
 void	freeGame(t_game *game)
