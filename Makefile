@@ -12,7 +12,7 @@ LIBS = $(LIBFT) $(LIBMLX) -lglfw -pthread -lm
 #------------------------Source-----------------------------
 
 # Sources and objects
-FILES = main init line_drawing raycasting render texture move\
+FILES = main init line_drawing raycasting render texture move minimap\
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix obj/, $(addsuffix .o, $(FILES)))

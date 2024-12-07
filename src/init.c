@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: damdam <damdam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:33 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/06 23:34:45 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:57:46 by damdam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	initPlayer(t_game *game)
 void	initMap(t_game *game)
 {
 	int		i;
-	char	*raw_map[] = {"1111111111\0", "1000000001\0", "1011111101\0",
+	char	*raw_map[] = {"1111111111\0", "1000000001\0", "1011011101\0",
 			"1N00000001\0", "1111111111\0", NULL};
 
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_drawing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: damdam <damdam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:15:45 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/06 22:03:12 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/07 02:18:45 by damdam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@ void	draw_wall_line(t_game *game, int x, int line_height, int tex_x)
 
 void	draw_floor_and_ceiling(t_game *game)
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
 	uint32_t	color;
 
-	color = rgb_to_rgba(game->ceiling_color.r, game->ceiling_color.g, game->ceiling_color.b);
+	color = rgb_to_rgba(game->ceiling_color.r, game->ceiling_color.g,
+			game->ceiling_color.b);
 	// Dessiner le plafond (moitié supérieure)
 	y = 0;
 	while (y < HEIGHT / 2)
@@ -67,7 +68,8 @@ void	draw_floor_and_ceiling(t_game *game)
 		y++;
 	}
 	// Dessiner le sol (moitié inférieure)
-	color = rgb_to_rgba(game->floor_color.r, game->floor_color.g, game->floor_color.b);
+	color = rgb_to_rgba(game->floor_color.r, game->floor_color.g,
+			game->floor_color.b);
 	while (y < HEIGHT)
 	{
 		x = 0;
@@ -79,3 +81,4 @@ void	draw_floor_and_ceiling(t_game *game)
 		y++;
 	}
 }
+

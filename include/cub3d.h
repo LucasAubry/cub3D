@@ -11,12 +11,13 @@
 #include <math.h>
 #include <stdint.h>
 
-#define WIDTH 980
+#define WIDTH 1280
 #define HEIGHT 720
 #define T_WIDTH 64
 #define T_HEIGHT 64
 #define MOVE_SPEED 0.07
-#define ROT_SPEED 0.07
+#define ROT_SPEED 0.12
+#define MAP_SIZE 150
 
 /* ========== ENUM ================ */
 
@@ -123,7 +124,7 @@ void				calculate_wall_distance(t_game *game, int *line_height,
 // render.c
 void				render_frame(void *param);
 void				render_column(t_game *game, int x);
-void				printData(t_game *game);
+void				render_minimap(t_game *game);
 
 // texture.c
 mlx_texture_t		*select_texture(t_game *game);
@@ -138,3 +139,11 @@ void				move_forward(t_game *game);
 void				move_backward(t_game *game);
 void				move_left(t_game *game);
 void				move_right(t_game *game);
+
+// minimap.c
+void				draw_minimap(t_game *game, int start_x, int start_y,
+						int tile_size);
+int					is_valid_tile(t_game *game, int map_x, int map_y);
+uint32_t			get_tile_color(t_game *game, int map_x, int map_y);
+void				draw_tile(t_game *game, int x, int y, int tile_size,
+						uint32_t color);

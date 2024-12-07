@@ -6,17 +6,17 @@ void	handle_input(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_F))
 		move_forward(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 		move_backward(game);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_R))
 		move_left(game);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_T))
 		move_right(game);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 		rotate_player(game, -ROT_SPEED);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_P))
 		rotate_player(game, ROT_SPEED);
 }
 

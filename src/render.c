@@ -3,25 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: damdam <damdam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:12:45 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/06 23:53:28 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:30:09 by damdam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-void	printData(t_game *game)
-{
-	printf("pos_x : %lf | pos_y : %lf | dir_x : %lf | dir_y : %lf | plane_x : %lf | plane_y : %lf\n", game->player.pos_x, game->player.pos_y, game->player.dir_x, game->player.dir_y, game->player.plane_x, game->player.plane_y);
-	printf("ray.dir_x : %lf | ray.dir_y : %lf\n", game->ray.dir_x, game->ray.dir_y);
-}
 
 void	render_frame(void *param)
 {
 	t_game		*game;
 	int			x;
-	static int i = 0;
+	static int	i = 0;
 
 	game = (t_game *)param;
 	x = 0;
@@ -31,10 +26,12 @@ void	render_frame(void *param)
 		render_column(game, x);
 		x++;
 	}
-	//printData(game);
+	render_minimap(game);
 	ft_printf("%d\n", i);
 	if (i == 0)
+	{
 		mlx_image_to_window(game->mlx, game->screen, 0, 0);
+	}
 	i++;
 }
 
@@ -48,4 +45,18 @@ void	render_column(t_game *game, int x)
 	perform_dda(game);
 	calculate_wall_distance(game, &line_height, &tex_x);
 	draw_wall_line(game, x, line_height, tex_x);
+}
+
+void	render_minimap(t_game *game)
+{
+	int	minimap_size;
+	int	tile_size;
+	int	start_x;
+	int	start_y;
+
+	minimap_size = 125;
+	tile_size = minimap_size / 5;
+	start_x = game->player.pos_x - 2;
+	start_y = game->player.pos_y - 2;
+	draw_minimap(game, start_x, start_y, tile_size);
 }
