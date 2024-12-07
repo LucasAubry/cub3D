@@ -14,6 +14,9 @@ LIBS = $(LIBFT) $(LIBMLX) -lglfw -pthread -lm
 # Sources and objects
 FILES = main \
 		verif \
+		file \
+		verif_file \
+		parsing \
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix obj/, $(addsuffix .o, $(FILES)))

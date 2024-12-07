@@ -1,41 +1,49 @@
 #include "cub3d.h"
 
-void	map_in_tab(t_game *game, int fd)
-{
-	char	*line;
-
-	while (line)
-	{
-		line = get_next_line(fd);
-		game->map[i] = ft_strtrim(line, "\n");
-		free(line);
-		i++;
-	}
-	game->map[i] = NULL;
-	close(fd);
-}
+//void	file_in_tab(t_game *game, int fd)
+//{
+//	char	*line;
+//
+//	while (line)
+//	{
+//		line = get_next_line(fd);
+//		game->map[i] = ft_strtrim(line, "\n");
+//		free(line);
+//		i++;
+//	}
+//	game->map[i] = NULL;
+//	close(fd);
+//}
 
 int	map(t_game *game, char **argv)
 {
 	int	fd;
 
-	fd = open(argv[1], 0_RDONLY);
+	fd = open(argv[1], O_RDONLY);
 	if (!check_fd(fd))
 	{
 		ft_error("%s\n", FD);
 		return (0);
 	}
-	map_in_tab(game, fd);
-	if (!verif_map(game->map))
+	if (!verif_file_order(game, fd))
 	{
-		ft_error("%s\n", BAD_CHAR);
+		ft_error("%s\n", FILES);
 		return (0);
 	}
-	if (!border_wall(game->map))
-	{
-		ft_error("%s\n", BORDER_WALL);
-		return (0);
-	}
+	printf("tout bon ");
+
+
+//	file_in_tab(game, fd);
+//	if (!verif_map(game->map))
+//	{
+//		ft_error("%s\n", BAD_CHAR);
+//		return (0);
+//	}
+//	if (!border_wall(game->map))
+//	{
+//		ft_error("%s\n", BORDER_WALL);
+//		return (0);
+//	}
 	return (1);
 }
 
@@ -48,7 +56,7 @@ int	file(char **argv)
 	point = 0;
 	if (ft_strncmp(argv[1] + (ft_strlen(argv[1]) - 4), ".cub", 4) != 0)
 	{
-		ft_error("%s\n", NOT.CUB);
+		ft_error("%s\n", NOT_CUB);
 		return (0);
 	}
 	while (argv[1][i])
@@ -68,15 +76,20 @@ int	file(char **argv)
 int	parsing(t_game *game, char **argv)
 {
 	if (!file(argv))
+	{
+		printf("FILE\n");
 		return (0);
+	}
 	if (!map(game, argv))
+	{
+		printf("MAP\n");
 		return (0);
+	}
+	printf("tout bon parsig\n");
+	return (1);
 }
 
 /*============TODO FOR PARSING============
-
-+ - si .cub
-+ - si la map contien soit N S E W 0 ou 1 et si il ny a pas plusieur N S E W (qui represente la posission de la cam du joueur
 
  - si la map est fermer par des murs
  - si la map mis a part la description de la map map chaque type delement peut separer pas des lignes vides
@@ -117,3 +130,4 @@ C 225,30,0
 
 
 regarde sujet pour suite
+*/
