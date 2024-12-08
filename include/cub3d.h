@@ -40,6 +40,7 @@ typedef struct s_game
 
 	void	*mlx;
 	char	**map;
+	char	*path_file;
 
 }	t_game;
 
@@ -60,15 +61,32 @@ typedef struct s_game
 
 int	parsing(t_game *game, char **argv);
 int	check_fd(int fd);
-int	verif_file_order(t_game *game, int fd);
+int	file_order(t_game *game, int fd);
+
+//fc
+int	fc_in_game(t_game *game, char **fc);
+int	fc_in_game(t_game *game, char **fc);
+//texture
+int	texture_in_game(t_game *game, char **texture);
+int	texture_in_game(t_game *game, char **texture);
+//map
+void	map_in_game(t_game *game, char *line, int fd, int len);
 
 
 
 
-int	check_char(char	c);
-int	*check_multi_char(int *multi_char, char c);
+
 int	verif_map(char **map);
 int	verif_texture_fc(char	**texture, char **fc);
 char	*skip_empty_line(char *line, int *fd);
+
+
+//tools:
+int	is_number(char c);
+int	line_is_space(char *line);
+int	check_char(char	c);
+int	check_fd(int fd);
+char	*skip_empty_line(char *line, int *fd);
+
 
 #endif

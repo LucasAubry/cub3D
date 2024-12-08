@@ -34,7 +34,13 @@ int	main(int argc, char **argv)
 			return (0);
 		}
 	
-
+		
+		int	i = 0;
+		while (game->map[i])
+		{
+			printf("%s\n", game->map[i]);
+			i++;
+		}
 		printf("%u\n", game->floor_color.r);
 		printf("%u\n", game->floor_color.g);
 		printf("%u\n", game->floor_color.b);

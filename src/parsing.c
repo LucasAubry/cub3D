@@ -15,37 +15,7 @@
 //	close(fd);
 //}
 
-int	map(t_game *game, char **argv)
-{
-	int	fd;
 
-	fd = open(argv[1], O_RDONLY);
-	if (!check_fd(fd))
-	{
-		ft_error("%s\n", FD);
-		return (0);
-	}
-	if (!verif_file_order(game, fd))
-	{
-		ft_error("%s\n", FILES);
-		return (0);
-	}
-	printf("tout bon ");
-
-
-//	file_in_tab(game, fd);
-//	if (!verif_map(game->map))
-//	{
-//		ft_error("%s\n", BAD_CHAR);
-//		return (0);
-//	}
-//	if (!border_wall(game->map))
-//	{
-//		ft_error("%s\n", BORDER_WALL);
-//		return (0);
-//	}
-	return (1);
-}
 
 int	file(char **argv)
 {
@@ -70,6 +40,39 @@ int	file(char **argv)
 		ft_error("%s\n", FILE_NOT_CORRECT);
 		return (0);
 	}
+	return (1);
+}
+
+int	map(t_game *game, char **argv)
+{
+	int	fd;
+
+	fd = open(argv[1], O_RDONLY);
+	game->path_file = ft_strdup(argv[1]);
+	if (!check_fd(fd))
+	{
+		ft_error("%s\n", FD);
+		return (0);
+	}
+	if (!file_order(game, fd))
+	{
+		ft_error("%s\n", FILES);
+		return (0);
+	}
+	printf("tout bon ");
+
+
+//	file_in_tab(game, fd);
+//	if (!verif_map(game->map))
+//	{
+//		ft_error("%s\n", BAD_CHAR);
+//		return (0);
+//	}
+//	if (!border_wall(game->map))
+//	{
+//		ft_error("%s\n", BORDER_WALL);
+//		return (0);
+//	}
 	return (1);
 }
 

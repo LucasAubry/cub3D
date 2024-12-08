@@ -14,9 +14,12 @@ LIBS = $(LIBFT) $(LIBMLX) -lglfw -pthread -lm
 # Sources and objects
 FILES = main \
 		verif \
-		file \
 		verif_file \
 		parsing \
+		tools \
+		in_game/fc_in_game \
+		in_game/map_in_game \
+		in_game/texture_in_game
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix obj/, $(addsuffix .o, $(FILES)))
@@ -35,6 +38,7 @@ all: $(LIBFT) $(LIBMLX) $(NAME)
 
 obj:
 	mkdir -p obj
+	mkdir -p obj/in_game
 
 $(LIBFT):
 	@$(MAKE) --quiet -C $(LIB)

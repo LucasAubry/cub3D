@@ -1,19 +1,6 @@
 #include "cub3d.h"
 
-int	check_fd(int fd)
-{
-	if (fd == -1)
-		return (0);
-	else
-		return (1);
-}
 
-int	check_char(char	c)
-{
-	if (c != 'N' || c != 'S' || c != 'E' || c != 0 || c != 1)
-		return (0);
-	return (1);
-}
 
 //int	*check_multi_char(int *multi_char, char c)
 //{
