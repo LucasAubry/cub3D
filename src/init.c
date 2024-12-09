@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: damdam <damdam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:33 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/07 15:57:46 by damdam           ###   ########.fr       */
+/*   Updated: 2024/12/09 14:18:52 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	initPlayer(t_game *game)
 void	initMap(t_game *game)
 {
 	int		i;
-	char	*raw_map[] = {"1111111111\0", "1000000001\0", "1011011101\0",
+	char	*raw_map[] = {"1111111111\0", "1000000001\0", "1011211101\0",
 			"1N00000001\0", "1111111111\0", NULL};
 
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
@@ -106,6 +106,7 @@ void	initTextures(t_game *game)
 	game->textures.s = mlx_load_png("img/purple_wall.png");
 	game->textures.e = mlx_load_png("img/grey_wall.png");
 	game->textures.w = mlx_load_png("img/yellow_wall.png");
+	game->textures.door = mlx_load_png("img/door.png");
 }
 
 void	initRay(t_game *game)
@@ -123,6 +124,7 @@ void	initRay(t_game *game)
 	game->ray.deltadist_y = 0.0;
 	game->ray.wall_dist = 0.0;
 	game->ray.side = -1;
+	game->ray.wall_door = 0;
 }
 
 void	printMap(char **map)

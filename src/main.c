@@ -35,6 +35,7 @@ void	freeGame(t_game *game)
 	mlx_delete_texture(game->textures.s);
 	mlx_delete_texture(game->textures.w);
 	mlx_delete_texture(game->textures.e);
+	mlx_delete_texture(game->textures.door);
 }
 
 int	main(int argc, char **argv)

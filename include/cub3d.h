@@ -44,6 +44,7 @@ typedef struct s_textures
 	mlx_texture_t	*s;
 	mlx_texture_t	*w;
 	mlx_texture_t	*e;
+	mlx_texture_t	*door;
 }					t_textures;
 
 // Structure pour les informations du joueur
@@ -76,6 +77,7 @@ typedef struct s_ray
 	double deltadist_y; // Distance entre deux côtés horizontaux de la grille
 	double wall_dist;   // Distance perpendiculaire du joueur au mur touché
 	int side;           // Indique quel côté du mur a été touché
+	int wall_door;
 }					t_ray;
 
 // Structure principale contenant les informations du jeu

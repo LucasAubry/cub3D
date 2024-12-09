@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:15:17 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/06 18:26:35 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:21:52 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 mlx_texture_t	*select_texture(t_game *game)
 {
 	// Sélection de la texture en fonction du mur touché
-	if (game->ray.side == 0 && game->ray.dir_x > 0)
+	if (game->ray.wall_door == 1)
+		return (game->textures.door);
+	else if (game->ray.side == 0 && game->ray.dir_x > 0)
 		return (game->textures.e);
 	else if (game->ray.side == 0 && game->ray.dir_x < 0)
 		return (game->textures.w);
