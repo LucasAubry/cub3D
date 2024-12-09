@@ -77,7 +77,7 @@ typedef struct s_ray
 	double deltadist_y; // Distance entre deux côtés horizontaux de la grille
 	double wall_dist;   // Distance perpendiculaire du joueur au mur touché
 	int side;           // Indique quel côté du mur a été touché
-	int wall_door;
+	int				wall_door;
 }					t_ray;
 
 // Structure principale contenant les informations du jeu
@@ -101,6 +101,8 @@ typedef struct s_game
 
 // main.c
 void				handle_input(void *param);
+void				animations(mlx_key_data_t keydata, void *param);
+void				exit_game(t_game *game);
 
 // init.c
 t_game				*initGame(void);
@@ -149,3 +151,6 @@ int					is_valid_tile(t_game *game, int map_x, int map_y);
 uint32_t			get_tile_color(t_game *game, int map_x, int map_y);
 void				draw_tile(t_game *game, int x, int y, int tile_size,
 						uint32_t color);
+
+// door.c
+void				open_door(t_game *game);

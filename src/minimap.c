@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: damdam <damdam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:28:10 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/07 16:34:27 by damdam           ###   ########.fr       */
+/*   Updated: 2024/12/09 17:18:25 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int	is_valid_tile(t_game *game, int map_x, int map_y)
 
 uint32_t	get_tile_color(t_game *game, int map_x, int map_y)
 {
-	if (game->map[map_y][map_x] == '1')
-		return (0x000000FF);
 	if (map_x == (int)game->player.pos_x && map_y == (int)game->player.pos_y)
 		return (0xFF0000FF);
+	if (game->map[map_y][map_x] == '2' || game->map[map_y][map_x] == '3')
+		return (0x808080FF);
 	if (game->map[map_y][map_x] == '0' || game->map[map_y][map_x] == 'N'
 		|| game->map[map_y][map_x] == 'S' || game->map[map_y][map_x] == 'E'
 		|| game->map[map_y][map_x] == 'W')
