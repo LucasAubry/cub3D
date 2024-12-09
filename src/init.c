@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:33 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/09 17:00:02 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:17:41 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	initMap(t_game *game)
 			"1N00000001\0", "1111111111\0", NULL};
 
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
+	if (!game->mlx)
+		(free(game), exit(0));
 	game->screen = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->map = malloc(sizeof(char *) * 6);
 	i = 0;
