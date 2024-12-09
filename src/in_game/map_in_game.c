@@ -1,6 +1,20 @@
 #include "cub3d.h"
 
-void	map_in_game(t_game *game, char *line, int fd, int len)
+int	have_char(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] > 32)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	map_in_game(t_game *game, char *line, int fd, int len)
 {
 
 	game->map = malloc(sizeof(char *) * len);
@@ -14,5 +28,15 @@ void	map_in_game(t_game *game, char *line, int fd, int len)
 	    line = ft_get_next_line(fd);
 	    len++;
 	}
+	if (line != NULL && !line_is_space(line))
+	{
+		while (line != NULL)
+		{
+			line = ft_get_next_line(fd);
+			if (have_char(line))
+				return (0);
+		}
+	}
 	game->map[len] = NULL;
+	return (1);
 }

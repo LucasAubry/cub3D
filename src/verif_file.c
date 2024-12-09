@@ -73,6 +73,7 @@ int	file_order(t_game *game, int fd)
 		return (0);
 	if (!fc_in_game(game, fc))
 		return (0);
-	map_in_game(game, line, fd, len);
+	if (!map_in_game(game, line, fd, len))
+		return (0);
 	return (1);
 }

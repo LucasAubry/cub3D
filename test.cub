@@ -1,10 +1,19 @@
+
+
+
+
+
 NO ./img/blue_wall.png
+
 SO ./img/purple_wall.png
 WE ./img/grey_wall.png
 EA ./img/yellow_wall.png
 
 
 F 220,100,1
+
+
+
 C 225,30,0
 
 

@@ -70,7 +70,7 @@ int	fc_in_game(t_game *game, char **fc);
 int	texture_in_game(t_game *game, char **texture);
 int	texture_in_game(t_game *game, char **texture);
 //map
-void	map_in_game(t_game *game, char *line, int fd, int len);
+int	map_in_game(t_game *game, char *line, int fd, int len);
 
 
 
