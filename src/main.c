@@ -48,6 +48,11 @@ int	main(int argc, char **argv)
 		printf("%u\n", game->ceiling_color.r);
 		printf("%u\n", game->ceiling_color.g);
 		printf("%u\n", game->ceiling_color.b);
+
+		printf("%p\n", (void *)game->textures.n);
+		printf("%p\n", (void *)game->textures.s);
+		printf("%p\n", (void *)game->textures.w);
+		printf("%p\n", (void *)game->textures.e);
 	}
 //	loop(game);
 }

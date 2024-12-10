@@ -18,25 +18,19 @@ int	map_in_game(t_game *game, char *line, int fd, int len)
 {
 
 	game->map = malloc(sizeof(char *) * len);
-	line = ft_get_next_line(fd);
 	line = skip_empty_line(line, &fd);
 	len = 0;
-	while (line != NULL && line_is_space(line))
+	while (line != NULL)
 	{
+		if (!line_is_space(line))
+			break;	
 		game->map[len] = ft_strtrim(line, "\n");
 		free(line);
 	    line = ft_get_next_line(fd);
 	    len++;
 	}
-	if (line != NULL && !line_is_space(line))
-	{
-		while (line != NULL)
-		{
-			line = ft_get_next_line(fd);
-			if (have_char(line))
-				return (0);
-		}
-	}
+	if (line != NULL)
+		return (0);
 	game->map[len] = NULL;
 	return (1);
 }

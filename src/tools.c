@@ -14,7 +14,7 @@ int	line_is_space(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] > 32)
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
 			return (1);
 		i++;
 	}

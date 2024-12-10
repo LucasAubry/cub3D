@@ -56,6 +56,7 @@ typedef struct s_game
 #define ERROR_255 "Error | RGB > 255"
 #define COMMA "Error | Too much number for rgb"
 #define CHAR_RGB "Error | Only number for rgb"
+#define DOUBLON_FILE "Error | Doublon in file"
 
 /* ========== FONCTION ============ */
 
@@ -72,12 +73,12 @@ int	texture_in_game(t_game *game, char **texture);
 //map
 int	map_in_game(t_game *game, char *line, int fd, int len);
 
+char	*file_to_tab(int fd, char **texture, char **fc);
 
 
 
 
 int	verif_map(char **map);
-int	verif_texture_fc(char	**texture, char **fc);
 char	*skip_empty_line(char *line, int *fd);
 
 
