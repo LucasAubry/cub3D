@@ -1,22 +1,5 @@
 #include "cub3d.h"
 
-//void	file_in_tab(t_game *game, int fd)
-//{
-//	char	*line;
-//
-//	while (line)
-//	{
-//		line = get_next_line(fd);
-//		game->map[i] = ft_strtrim(line, "\n");
-//		free(line);
-//		i++;
-//	}
-//	game->map[i] = NULL;
-//	close(fd);
-//}
-
-
-
 int	file(char **argv)
 {
 	int	i;
@@ -59,20 +42,21 @@ int	map(t_game *game, char **argv)
 		ft_error("%s\n", FILES);
 		return (0);
 	}
-	printf("tout bon ");
+	return (1);
+}
 
-
-//	file_in_tab(game, fd);
-//	if (!verif_map(game->map))
-//	{
-//		ft_error("%s\n", BAD_CHAR);
-//		return (0);
-//	}
-//	if (!border_wall(game->map))
-//	{
-//		ft_error("%s\n", BORDER_WALL);
-//		return (0);
-//	}
+int	check_map(t_game *game)
+{
+	if (!verif_map(game->map))
+	{
+		ft_error("%s\n", BAD_CHAR);
+		return (0);
+	}
+	if (!border_wall(game->map))
+	{
+		ft_error("%s\n", BORDER_WALL);
+		return (0);
+	}
 	return (1);
 }
 
@@ -86,6 +70,11 @@ int	parsing(t_game *game, char **argv)
 	if (!map(game, argv))
 	{
 		printf("MAP\n");
+		return (0);
+	}
+	if (!check_map(game))
+	{
+		printf("VERIF_MAP\n");
 		return (0);
 	}
 	printf("tout bon parsig\n");

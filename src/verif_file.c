@@ -54,6 +54,8 @@ int	file_order(t_game *game, int fd)
 	fd = open(game->path_file, O_RDONLY);
 
 	line = file_to_tab(fd, texture, fc);
+	if (line == NULL)
+		return (0);
 	if (!is_space111(line))
 		return (0);
 	if (!texture_in_game(game, texture))
