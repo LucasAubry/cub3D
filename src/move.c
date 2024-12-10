@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:32:00 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/09 15:39:41 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/09 22:13:07 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	rotate_player(t_game *game, double angle)
 		- game->player.plane_y * sin(angle);
 	game->player.plane_y = old_plane_x * sin(angle) + game->player.plane_y
 		* cos(angle);
-	render_frame(game);
 }
 
 void	move_forward(t_game *game)
@@ -45,7 +44,6 @@ void	move_forward(t_game *game)
 		&& game->map[(int)(game->player.pos_y + game->player.dir_y
 			* MOVE_SPEED)][(int)(game->player.pos_x)] != '2')
 		game->player.pos_y += game->player.dir_y * MOVE_SPEED;
-	render_frame(game);
 }
 
 void	move_backward(t_game *game)
@@ -60,7 +58,6 @@ void	move_backward(t_game *game)
 		&& game->map[(int)(game->player.pos_y - game->player.dir_y
 			* MOVE_SPEED)][(int)(game->player.pos_x)] != '2')
 		game->player.pos_y -= game->player.dir_y * MOVE_SPEED;
-	render_frame(game);
 }
 
 void	move_left(t_game *game)
@@ -81,7 +78,6 @@ void	move_left(t_game *game)
 		&& game->map[(int)(game->player.pos_y + perp_y
 			* MOVE_SPEED)][(int)(game->player.pos_x)] != '2')
 		game->player.pos_y += perp_y * MOVE_SPEED;
-	render_frame(game);
 }
 
 void	move_right(t_game *game)
@@ -101,5 +97,4 @@ void	move_right(t_game *game)
 		&& game->map[(int)(game->player.pos_y + perp_y
 			* MOVE_SPEED)][(int)(game->player.pos_x)] != '2')
 		game->player.pos_y += perp_y * MOVE_SPEED;
-	render_frame(game);
 }

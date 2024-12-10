@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:33 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/09 18:17:41 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/09 23:25:32 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_game	*initGame(void)
 	initPlayer(game);
 	initTextures(game);
 	initRay(game);
+	initKnifeAnimation(game);
 	return (game);
 }
 

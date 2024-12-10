@@ -11,13 +11,14 @@
 #include <math.h>
 #include <stdint.h>
 
-#define WIDTH 1280
-#define HEIGHT 720
+#define WIDTH 854
+#define HEIGHT 480
 #define T_WIDTH 64
 #define T_HEIGHT 64
 #define MOVE_SPEED 0.07
 #define ROT_SPEED 0.12
 #define MAP_SIZE 150
+#define FRAME_RATE 30
 
 /* ========== ENUM ================ */
 
@@ -36,6 +37,16 @@ typedef struct s_color
 	uint8_t			g;
 	uint8_t			b;
 }					t_color;
+
+typedef struct s_animation
+{
+	mlx_texture_t **frames; // Tableau de pointeurs vers les frames
+	int tot_frames;         // Nombre total de frames
+	int cur_frame;          // Frame actuellement affichée
+	int playing;            // Indique si l'animation est en cours
+	int frame_delay;        // Temps entre les frames
+	int last_update;        // Dernier moment où la frame a changé
+}					t_animation;
 
 // Structure pour les textures
 typedef struct s_textures
@@ -93,6 +104,7 @@ typedef struct s_game
 	t_ray			ray;
 	mlx_image_t		*screen;
 	mlx_t			*mlx;
+	t_animation		k_anim;
 }					t_game;
 
 /* ========== ERROR ================*/
@@ -154,3 +166,9 @@ void				draw_tile(t_game *game, int x, int y, int tile_size,
 
 // door.c
 void				open_door(t_game *game);
+
+// knife.c
+void				initKnifeAnimation(t_game *game);
+void				draw_animation(t_game *game);
+uint8_t				mix_color(uint8_t r_ap, uint8_t r_pp, uint8_t alpha_pp);
+uint32_t			mix_colors(uint32_t ap, uint32_t pp);

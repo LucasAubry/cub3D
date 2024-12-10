@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: damdam <damdam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:12:45 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/07 16:30:09 by damdam           ###   ########.fr       */
+/*   Updated: 2024/12/10 14:19:38 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	render_frame(void *param)
 		x++;
 	}
 	render_minimap(game);
-	ft_printf("%d\n", i);
+	draw_animation(game);
 	if (i == 0)
 	{
 		mlx_image_to_window(game->mlx, game->screen, 0, 0);

@@ -3,7 +3,9 @@
 
 void	handle_input(void *param)
 {
-	t_game	*game;
+	t_game			*game;
+	static uint64_t	last_render_time = 0;
+	uint64_t		current_time;
 
 	game = (t_game *)param;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
@@ -18,6 +20,12 @@ void	handle_input(void *param)
 		rotate_player(game, -ROT_SPEED);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 		rotate_player(game, ROT_SPEED);
+	current_time = mlx_get_time() * 1000;
+	if (current_time - last_render_time >= 1000 / FRAME_RATE)
+	{
+		render_frame(game);
+		last_render_time = current_time;
+	}
 }
 
 void	animations(mlx_key_data_t keydata, void *param)
@@ -29,6 +37,8 @@ void	animations(mlx_key_data_t keydata, void *param)
 	{
 		if (keydata.key == MLX_KEY_SPACE)
 			open_door(game);
+		if (keydata.key == MLX_KEY_E)
+			game->k_anim.playing = 1;
 		else if (keydata.key == MLX_KEY_ESCAPE)
 			exit_game(game);
 	}
@@ -69,7 +79,6 @@ int	main(int argc, char **argv)
 	game = initGame();
 	print_map(game->map);
 	render_frame(game);
-	
 	mlx_close_hook(game->mlx, (mlx_closefunc)freeGame, game);
 	mlx_loop_hook(game->mlx, handle_input, game);
 	mlx_key_hook(game->mlx, animations, game);
