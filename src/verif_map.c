@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	*check_multi_char(int *multi_char, char c)
+void	check_multi_char(int *multi_char, char c)
 {
 	if (c == 'N')
 		multi_char[0]++;
@@ -8,24 +8,26 @@ int	*check_multi_char(int *multi_char, char c)
 		multi_char[1]++;
 	else if (c == 'E')
 		multi_char[2]++;
-	return (multi_char);
+	else if (c == 'W')
+		multi_char[3]++;
 }
 
 int	verif_map(char **map)
 {
 	int	i;
 	int	j;
-	int	multi_char[2];
+	int	multi_char[4];
 
 	i = 0;
+	ft_bzero(multi_char, sizeof(multi_char));
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-			if (check_char(map[i][j]))
+			if (!check_char(map[i][j]))
 				return (0);
-			multi_char = check_multi_char(multi_char, map[i][j]);
+			check_multi_char(multi_char, map[i][j]);
 			j++;
 		}
 		i++;
@@ -34,4 +36,3 @@ int	verif_map(char **map)
 		return (0);
 	return (1);
 }
-

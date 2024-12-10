@@ -52,11 +52,11 @@ int	check_map(t_game *game)
 		ft_error("%s\n", BAD_CHAR);
 		return (0);
 	}
-	if (!border_wall(game->map))
-	{
-		ft_error("%s\n", BORDER_WALL);
-		return (0);
-	}
+//	if (!border_wall(game->map))
+//	{
+//		ft_error("%s\n", BORDER_WALL);
+//		return (0);
+//	}
 	return (1);
 }
 

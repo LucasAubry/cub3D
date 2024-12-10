@@ -15,6 +15,7 @@ LIBS = $(LIBFT) $(LIBMLX) -lglfw -pthread -lm
 FILES = main \
 		verif \
 		verif_file \
+		verif_map \
 		parsing \
 		tools \
 		in_game/fc_in_game \

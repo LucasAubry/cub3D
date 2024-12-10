@@ -72,8 +72,9 @@ int	texture_in_game(t_game *game, char **texture);
 int	texture_in_game(t_game *game, char **texture);
 //map
 int	map_in_game(t_game *game, char *line, int fd, int len);
-
 char	*file_to_tab(int fd, char **texture, char **fc);
+//verif map
+int	verif_map(char **map);
 
 
 

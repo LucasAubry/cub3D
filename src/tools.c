@@ -21,11 +21,12 @@ int	line_is_space(char *line)
 	return (0);
 }
 
-int	check_char(char	c)
+int	check_char(char c)
 {
-	if (c != 'N' || c != 'S' || c != 'E' || c != 0 || c != 1)
-		return (0);
-	return (1);
+	if (c == 'N' || c == 'S' || c == 'E' || c == '0' || c == '1' || c == ' ')
+		return (1);
+	printf("dslkfjdlk\n");
+	return (0);
 }
 
 int	check_fd(int fd)
