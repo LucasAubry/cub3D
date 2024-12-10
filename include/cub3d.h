@@ -18,7 +18,7 @@
 #define MOVE_SPEED 0.05
 #define ROT_SPEED 0.12
 #define MAP_SIZE 150
-#define FRAME_RATE 30
+#define FRAME_RATE 60
 
 /* ========== ENUM ================ */
 
@@ -170,3 +170,4 @@ void				open_door(t_game *game);
 // knife.c
 void				init_knife_animation(t_game *game);
 void				draw_animation(t_game *game);
+void				init_knife_frame(t_game *game, int nb_frames);

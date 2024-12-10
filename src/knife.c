@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:50:34 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/10 19:39:20 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:55:04 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,26 @@
 
 void	init_knife_animation(t_game *game)
 {
-	char	*path;
-	int		i;
-	char	*c;
-	char	*extension;
-
-	game->k_anim.tot_frames = 85;
-	game->k_anim.frames = malloc(sizeof(mlx_texture_t *) * 85);
+	game->k_anim.tot_frames = 131;
+	game->k_anim.frames = malloc(sizeof(mlx_texture_t *) * 131);
 	game->k_anim.cur_frame = 0;
 	game->k_anim.playing = 0;
 	game->k_anim.frame_delay = 50;
 	game->k_anim.last_update = 0;
+	init_knife_frame(game, game->k_anim.tot_frames);
+}
+
+void	init_knife_frame(t_game *game, int nb_frames)
+{
+	int		i;
+	char	*path;
+	char	*c;
+	char	*extension;
+
 	i = 0;
-	while (i < 85)
+	while (i < nb_frames)
 	{
-		path = "anim/knife/frame";
+		path = "anim/knife_v3/frame";
 		c = ft_itoa(i);
 		extension = ".png";
 		path = ft_strjoin(path, c);
@@ -54,7 +59,7 @@ void	draw_animation(t_game *game)
 	uint32_t		color;
 	uint8_t			*pix;
 
-	if (game->k_anim.cur_frame == 84)
+	if (game->k_anim.cur_frame == game->k_anim.tot_frames-1)
 	{
 		game->k_anim.playing = 0;
 		game->k_anim.cur_frame = 0;
@@ -85,4 +90,3 @@ void	draw_animation(t_game *game)
 		y++;
 	}
 }
-
