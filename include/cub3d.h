@@ -15,7 +15,7 @@
 #define HEIGHT 480
 #define T_WIDTH 64
 #define T_HEIGHT 64
-#define MOVE_SPEED 0.07
+#define MOVE_SPEED 0.05
 #define ROT_SPEED 0.12
 #define MAP_SIZE 150
 #define FRAME_RATE 30

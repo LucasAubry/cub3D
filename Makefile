@@ -4,6 +4,8 @@ CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -Iinclude -Ilib/inc -IMLX42/include -g
 CREAD	=	-lreadline -lncursesw
 LIB			=	lib
+SRCDIR	=	src
+INCDIR	=	include
 LIBFT		=	$(LIB)/libft.a
 MLX			=	MLX42
 LIBMLX 	=	$(MLX)/build/libmlx42.a
@@ -70,5 +72,20 @@ fclean: clean
 	rm -rf $(MLX)/build
 
 re: fclean all
+
+norminette:
+	@echo "Norminette de $(NAME) dans $(SRCDIR) et $(INCDIR)..."
+	@if norminette $(SRCDIR)/*.c $(INCDIR)/*.h | grep -v "OK!" | grep -q "Error!"; then \
+		norminette $(SRCDIR)/*.c $(INCDIR)/*.h | grep -v "OK!" | \
+		while read line; do \
+			if echo $$line | grep -q "Error!"; then \
+				echo "\033[0;31m$$line\033[0m"; \
+			else \
+				echo "$$line"; \
+			fi; \
+		done; \
+	else \
+		echo "\033[0;32mAll files are norminette friendly !\033[0m"; \
+	fi
 
 .PHONY: all clean fclean re valgrind
