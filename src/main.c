@@ -105,7 +105,7 @@ int	main(int argc, char **argv)
 
 	(void)argv;
 	(void)argc;
-	game = initGame();
+	game = init_game();
 	print_map(game->map);
 	render_frame(game);
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);

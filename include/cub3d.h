@@ -117,12 +117,12 @@ void				animations(mlx_key_data_t keydata, void *param);
 void				exit_game(t_game *game);
 
 // init.c
-t_game				*initGame(void);
-void				initPlayer(t_game *game);
-void				initMap(t_game *game);
-void				initTextures(t_game *game);
-void				printMap(char **map);
-void				initRay(t_game *game);
+t_game				*init_game(void);
+void				init_player(t_game *game);
+void				init_map(t_game *game);
+void				init_textures(t_game *game);
+void				print_map(char **map);
+void				init_ray(t_game *game);
 
 // line_drawing.c
 t_draw_limits		calculate_draw_limits(int line_height);
@@ -168,7 +168,5 @@ void				draw_tile(t_game *game, int x, int y, int tile_size,
 void				open_door(t_game *game);
 
 // knife.c
-void				initKnifeAnimation(t_game *game);
+void				init_knife_animation(t_game *game);
 void				draw_animation(t_game *game);
-uint8_t				mix_color(uint8_t r_ap, uint8_t r_pp, uint8_t alpha_pp);
-uint32_t			mix_colors(uint32_t ap, uint32_t pp);

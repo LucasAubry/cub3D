@@ -6,26 +6,26 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:33 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/09 23:25:32 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:30:21 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_game	*initGame(void)
+t_game	*init_game(void)
 {
 	t_game	*game;
 
 	game = malloc(sizeof(t_game));
-	initMap(game);
-	initPlayer(game);
-	initTextures(game);
-	initRay(game);
-	initKnifeAnimation(game);
+	init_map(game);
+	init_player(game);
+	init_textures(game);
+	init_ray(game);
+	init_knife_animation(game);
 	return (game);
 }
 
-void	initPlayer(t_game *game)
+void	init_player(t_game *game)
 {
 	int	x;
 	int	y;
@@ -77,10 +77,10 @@ void	initPlayer(t_game *game)
 	}
 }
 
-void	initMap(t_game *game)
+void	init_map(t_game *game)
 {
 	int		i;
-	char	*raw_map[] = {"1111111111\0", "1000000001\0", "1011211101\0",
+	char	*raw_map[] = {"1111111111\0", "1000000001\0", "1010201101\0",
 			"1N00000001\0", "1111111111\0", NULL};
 
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
@@ -97,7 +97,7 @@ void	initMap(t_game *game)
 	game->map[i] = NULL;
 }
 
-void	initTextures(t_game *game)
+void	init_textures(t_game *game)
 {
 	game->ceiling_color.r = 50;
 	game->ceiling_color.g = 50;
@@ -112,7 +112,7 @@ void	initTextures(t_game *game)
 	game->textures.door = mlx_load_png("img/door.png");
 }
 
-void	initRay(t_game *game)
+void	init_ray(t_game *game)
 {
 	game->ray.camera_x = 0.0;
 	game->ray.dir_x = game->player.dir_x;
@@ -130,7 +130,7 @@ void	initRay(t_game *game)
 	game->ray.wall_door = 0;
 }
 
-void	printMap(char **map)
+void	print_map(char **map)
 {
 	int i;
 
