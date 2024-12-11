@@ -4,25 +4,29 @@ int	fc_to_tab(uint8_t *floor_cel, char **fc, int i)
 {
 	char	*rgb;
 	char	color[16];
-	int		j;
-	int		k;
+	int		int_tab[3];
 
-	k = 0;
+	bz(int_tab, 3);
 	rgb = ft_strchr(fc[i], ' ');
 	while (*rgb != '\0')
 	{
-		j = 0;
+		int_tab[0] = 0;
 		while (*rgb == ' ' || *rgb == '\t')
 			rgb++;
 		ft_bzero(color, ft_strlen(rgb) + 1);
 		while (is_number(*rgb))
-			color[j++] = *rgb++;
+			color[int_tab[0]++] = *rgb++;
 		if (*rgb != '\0' && *rgb != ',' && *rgb != ' ' && *rgb != '\t')
 			return (0);
-		floor_cel[k++] = (uint8_t)ft_atoi(color);
+		floor_cel[int_tab[1]++] = (uint8_t)ft_atoi(color);
+		if (*rgb == ',' && int_tab[2] == 2)
+			return (0);
 		if (*rgb)
 			rgb++;
+		int_tab[2]++;
 	}
+	if (int_tab[2] != 3)
+		return (0);
 	return (1);
 }
 
@@ -48,6 +52,30 @@ int	verif_comma(char **fc)
 	return (1);
 }
 
+int	verif_255(char *fc[2])
+{
+	int		i;
+	int		value;
+	char	*token;
+
+	i = 0;
+	while (i < 2)
+	{
+		token = fc[i] + 2;
+		while (token)
+		{
+			value = ft_atoi(token);
+			if (value > 255)
+				return (0);
+			token = strchr(token, ',');
+			if (token)
+				token++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	select_fc(uint8_t *floor, uint8_t *ceiling, char **fc)
 {
 	fc[0] = ft_strtrim(fc[0], "\n");
@@ -57,21 +85,17 @@ int	select_fc(uint8_t *floor, uint8_t *ceiling, char **fc)
 		printf("%s\n", COMMA);
 		return (0);
 	}
+	if (!verif_255(fc))
+	{
+		printf("%s\n", ERROR_255);
+		return (0);
+	}
 	if (!fc_to_tab(floor, fc, 0) || !fc_to_tab(ceiling, fc, 1))
 	{
 		printf("%s\n", CHAR_RGB);
 		return (0);
 	}
 	return (1);
-}
-
-int	verif_255(t_game *game)
-{
-	if (game->floor_color.r <= 255 && game->floor_color.g <= 255
-		&& game->floor_color.b <= 255 && game->ceiling_color.r <= 255
-		&& game->ceiling_color.g <= 255 && game->ceiling_color.b <= 255)
-		return (1);
-	return (0);
 }
 
 int	fc_in_game(t_game *game, char **fc)
@@ -87,10 +111,5 @@ int	fc_in_game(t_game *game, char **fc)
 	game->ceiling_color.r = ceiling[0];
 	game->ceiling_color.g = ceiling[1];
 	game->ceiling_color.b = ceiling[2];
-	if (!verif_255(game))
-	{
-		printf("%s\n", ERROR_255);
-		return (0);
-	}
 	return (1);
 }

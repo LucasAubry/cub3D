@@ -9,3 +9,16 @@ void	len_of_map(t_game *game, char **map)
 		i++;
 	game->size_y = i;
 }
+
+void	bz(int	*tab, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i != n)
+	{
+		tab[i] = 0;
+		i++;
+	}
+}
+

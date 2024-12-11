@@ -92,7 +92,8 @@ int	check_char(char	c);
 int	check_fd(int fd);
 char	*skip_empty_line(char *line, int *fd);
 void	len_of_map(t_game *game, char **map);
-
+void	bz(int	*tab, int n);
+void	bz_char(char *tab, int n);
 
 
 #endif

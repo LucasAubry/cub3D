@@ -51,7 +51,12 @@ void	player_position(t_game *game, char **map, int *i, int *j)
 
 void	flood_fill(t_game *game, char **map, int x, int y)
 {
-	if (y == game->size_y -1 || map[x][y] == '\0' || map[x][y] == ' ')
+	if (x < 0 || y < 0 || x >= game->size_y || y >= (int)ft_strlen(map[x]))
+	{
+		ft_error("%s\n", CLOSE_MAP);
+		exit(1);
+	}
+	if (map[x][y] == '\0' || map[x][y] == ' ')
 	{
 		ft_error("%s\n", CLOSE_MAP);
 		exit(1);
