@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 02:36:36 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 23:06:05 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/12 00:38:49 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,6 @@ void				exit_game(t_game *game);
 // init.c
 void				init_game(t_game *game);
 void				init_screen(t_game *game);
-void				init_textures(t_game *game);
 void				init_ray(t_game *game);
 
 // init_player.c

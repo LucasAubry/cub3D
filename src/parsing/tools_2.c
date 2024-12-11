@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:16:56 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 23:05:39 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:35:09 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	free_parsing(t_game *game)
 		mlx_delete_texture(game->textures.e);
 	if (game->textures.w != NULL)
 		mlx_delete_texture(game->textures.w);
-	free(game->path_file);
-	free_map(game->map);
+	if (game->path_file)
+		free(game->path_file);
+	if (game->map)
+		free_map(game->map);
 }

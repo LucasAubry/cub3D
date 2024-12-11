@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:18:17 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 23:05:50 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:40:32 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		game = malloc(sizeof(t_game));
+		game = ft_calloc(1, sizeof(t_game));
 		if (!parsing(game, argv))
 		{
 			printf("MAIN PARSING");

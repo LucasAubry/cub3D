@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:17:54 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 22:15:43 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:59:43 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,36 +90,28 @@ int	verif_255(char *fc[2])
 
 int	select_fc(uint8_t *floor, uint8_t *ceiling, char **fc)
 {
-	char	*fc2[2];
+	char	*tmp[2];
 
-	fc2[0] = ft_strtrim(fc[0], "\n");
-	fc2[1] = ft_strtrim(fc[1], "\n");
+	tmp[0] = ft_strtrim(fc[0], "\n");
+	tmp[1] = ft_strtrim(fc[1], "\n");
 	free_texture(fc, 2);
-	fc[0] = fc2[0];
-	fc[1] = fc2[1];
+	fc[0] = tmp[0];
+	fc[1] = tmp[1];
 	if (!verif_comma(fc))
 	{
 		printf("%s\n", COMMA);
-		free(fc[0]);
-		free(fc[1]);
 		return (0);
 	}
 	if (!verif_255(fc))
 	{
 		printf("%s\n", ERROR_255);
-		free(fc[0]);
-		free(fc[1]);
 		return (0);
 	}
 	if (!fc_to_tab(floor, fc, 0) || !fc_to_tab(ceiling, fc, 1))
 	{
 		printf("%s\n", CHAR_RGB);
-		free(fc[0]);
-		free(fc[1]);
 		return (0);
 	}
-	free(fc[0]);
-	free(fc[1]);
 	return (1);
 }
 
@@ -129,7 +121,9 @@ int	fc_in_game(t_game *game, char **fc)
 	uint8_t	ceiling[3];
 
 	if (!select_fc(floor, ceiling, fc))
+	{
 		return (0);
+	}
 	game->floor_color.r = floor[0];
 	game->floor_color.g = floor[1];
 	game->floor_color.b = floor[2];

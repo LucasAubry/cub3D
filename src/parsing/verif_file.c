@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:17:02 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 22:50:44 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/12 00:36:22 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	texture_to_null(char **texture, char **fc)
 	fc[1] = NULL;
 }
 
-int	is_space111(char *line)
+int	is_valid_map_line(char *line)
 {
 	int	i;
 
@@ -67,12 +67,12 @@ int	file_order(t_game *game, int fd)
 	fd = open(game->path_file, O_RDONLY);
 	line = file_to_tab(fd, texture, fc);
 	if (line == NULL)
-		return (0);
-	if (!is_space111(line) || !map_in_game(game, &line, fd, len))
-		return (free(line), 0);
+		return (free_texture(texture, 4), free_texture(fc, 2), 0);
+	if (!is_valid_map_line(line) || !map_in_game(game, &line, fd, len))
+		return (free(line), free_texture(texture, 4), free_texture(fc, 2), 0);
 	if (!texture_in_game(game, texture))
-		return (free(line), free_texture(texture, 4), 0);
+		return (free(line), free_texture(texture, 4), free_texture(fc, 2), 0);
 	if (!fc_in_game(game, fc))
 		return (free(line), free_texture(texture, 4), free_texture(fc, 2), 0);
-	return (free(line), free_texture(texture, 4), 1);
+	return (free(line), free_texture(texture, 4), free_texture(fc, 2), 1);
 }
