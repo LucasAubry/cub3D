@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:32:00 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 02:32:54 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:57:03 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,28 @@ void	rotate_player(t_game *game, double angle)
 void	move_forward(t_game *game)
 {
 	if (game->map[(int)(game->player.pos_y)][(int)(game->player.pos_x
-			+ game->player.dir_x * MOVE_SPEED)] != '1'
+			+ game->player.dir_x * (MOVE_SPEED + 0.1))] != '1'
 		&& game->map[(int)(game->player.pos_y)][(int)(game->player.pos_x
-			+ game->player.dir_x * MOVE_SPEED)] != '2')
+			+ game->player.dir_x * (MOVE_SPEED + 0.1))] != '2')
 		game->player.pos_x += game->player.dir_x * MOVE_SPEED;
 	if (game->map[(int)(game->player.pos_y + game->player.dir_y
-			* MOVE_SPEED)][(int)(game->player.pos_x)] != '1'
+			* (MOVE_SPEED + 0.1))][(int)(game->player.pos_x)] != '1'
 		&& game->map[(int)(game->player.pos_y + game->player.dir_y
-			* MOVE_SPEED)][(int)(game->player.pos_x)] != '2')
+			* (MOVE_SPEED + 0.1))][(int)(game->player.pos_x)] != '2')
 		game->player.pos_y += game->player.dir_y * MOVE_SPEED;
 }
 
 void	move_backward(t_game *game)
 {
 	if (game->map[(int)(game->player.pos_y)][(int)(game->player.pos_x
-			- game->player.dir_x * MOVE_SPEED)] != '1'
+			- game->player.dir_x * (MOVE_SPEED + 0.1))] != '1'
 		&& game->map[(int)(game->player.pos_y)][(int)(game->player.pos_x
-			- game->player.dir_x * MOVE_SPEED)] != '2')
+			- game->player.dir_x * (MOVE_SPEED + 0.1))] != '2')
 		game->player.pos_x -= game->player.dir_x * MOVE_SPEED;
 	if (game->map[(int)(game->player.pos_y - game->player.dir_y
-			* MOVE_SPEED)][(int)(game->player.pos_x)] != '1'
+			* (MOVE_SPEED + 0.1))][(int)(game->player.pos_x)] != '1'
 		&& game->map[(int)(game->player.pos_y - game->player.dir_y
-			* MOVE_SPEED)][(int)(game->player.pos_x)] != '2')
+			* (MOVE_SPEED + 0.1))][(int)(game->player.pos_x)] != '2')
 		game->player.pos_y -= game->player.dir_y * MOVE_SPEED;
 }
 
@@ -65,14 +65,14 @@ void	move_left(t_game *game)
 	perp_x = game->player.dir_y;
 	perp_y = -game->player.dir_x;
 	if (game->map[(int)(game->player.pos_y)][(int)(game->player.pos_x + perp_x
-			* MOVE_SPEED)] != '1'
+			* (MOVE_SPEED + 0.1))] != '1'
 		&& game->map[(int)(game->player.pos_y)][(int)(game->player.pos_x
-			+ perp_x * MOVE_SPEED)] != '2')
+			+ perp_x * (MOVE_SPEED + 0.1))] != '2')
 		game->player.pos_x += perp_x * MOVE_SPEED;
 	if (game->map[(int)(game->player.pos_y + perp_y
-			* MOVE_SPEED)][(int)(game->player.pos_x)] != '1'
+			* (MOVE_SPEED + 0.1))][(int)(game->player.pos_x)] != '1'
 		&& game->map[(int)(game->player.pos_y + perp_y
-			* MOVE_SPEED)][(int)(game->player.pos_x)] != '2')
+			* (MOVE_SPEED + 0.1))][(int)(game->player.pos_x)] != '2')
 		game->player.pos_y += perp_y * MOVE_SPEED;
 }
 
@@ -84,13 +84,13 @@ void	move_right(t_game *game)
 	perp_x = -game->player.dir_y;
 	perp_y = game->player.dir_x;
 	if (game->map[(int)(game->player.pos_y)][(int)(game->player.pos_x + perp_x
-			* MOVE_SPEED)] != '1'
+			* (MOVE_SPEED + 0.1))] != '1'
 		&& game->map[(int)(game->player.pos_y)][(int)(game->player.pos_x
-			+ perp_x * MOVE_SPEED)] != '2')
+			+ perp_x * (MOVE_SPEED + 0.1))] != '2')
 		game->player.pos_x += perp_x * MOVE_SPEED;
 	if (game->map[(int)(game->player.pos_y + perp_y
-			* MOVE_SPEED)][(int)(game->player.pos_x)] != '1'
+			* (MOVE_SPEED + 0.1))][(int)(game->player.pos_x)] != '1'
 		&& game->map[(int)(game->player.pos_y + perp_y
-			* MOVE_SPEED)][(int)(game->player.pos_x)] != '2')
+			* (MOVE_SPEED + 0.1))][(int)(game->player.pos_x)] != '2')
 		game->player.pos_y += perp_y * MOVE_SPEED;
 }

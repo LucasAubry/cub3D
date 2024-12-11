@@ -14,10 +14,10 @@ LIBS = $(LIBFT) $(LIBMLX) -lglfw -pthread -lm
 #------------------------Source-----------------------------
 
 # Sources and objects
-FILES = main init line_drawing raycasting render texture move minimap door knife init_player free\
+FILESEXEC = main init line_drawing raycasting render texture move minimap door knife init_player free\
 
-SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
-OBJS = $(addprefix obj/, $(addsuffix .o, $(FILES)))
+SRCS = $(addprefix src/exec/, $(addsuffix .c, $(FILESEXEC)))
+OBJS = $(addprefix obj/exec/, $(addsuffix .o, $(FILESEXEC)))
 
 #------------------------Colors-----------------------------
 
@@ -32,7 +32,7 @@ endef
 all: $(LIBFT) $(LIBMLX) $(NAME)
 
 obj:
-	mkdir -p obj
+	mkdir -p obj/exec
 
 $(LIBFT):
 	@$(MAKE) --quiet -C $(LIB)
