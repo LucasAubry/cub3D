@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 02:36:36 by dalebran          #+#    #+#             */
+/*   Updated: 2024/12/11 02:37:28 by dalebran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 
 /* ========== INCLUDE ============= */
@@ -18,11 +30,17 @@
 #define MOVE_SPEED 0.05
 #define ROT_SPEED 0.12
 #define MAP_SIZE 150
-#define FRAME_RATE 60
+#define FRAME_RATE 30
 
 /* ========== ENUM ================ */
 
 /* ========== STRUCTURE =========== */
+
+typedef struct s_xy
+{
+	int				x;
+	int				y;
+}					t_xy;
 
 typedef struct s_draw_limits
 {
@@ -30,7 +48,6 @@ typedef struct s_draw_limits
 	int				end;
 }					t_draw_limits;
 
-// Structure pour stocker les couleurs RGB
 typedef struct s_color
 {
 	uint8_t			r;
@@ -40,15 +57,12 @@ typedef struct s_color
 
 typedef struct s_animation
 {
-	mlx_texture_t **frames; // Tableau de pointeurs vers les frames
-	int tot_frames;         // Nombre total de frames
-	int cur_frame;          // Frame actuellement affichée
-	int playing;            // Indique si l'animation est en cours
-	int frame_delay;        // Temps entre les frames
-	int last_update;        // Dernier moment où la frame a changé
+	mlx_texture_t	**frames;
+	int				tot_frames;
+	int				cur_frame;
+	int				playing;
 }					t_animation;
 
-// Structure pour les textures
 typedef struct s_textures
 {
 	mlx_texture_t	*n;
@@ -58,40 +72,34 @@ typedef struct s_textures
 	mlx_texture_t	*door;
 }					t_textures;
 
-// Structure pour les informations du joueur
 typedef struct s_player
 {
-	double pos_x;   // Position actuelle X du joueur
-	double pos_y;   // Position actuelle Y du joueur
-	double dir_x;   // Direction actuelle X du joueur
-	double dir_y;   // Direction actuelle Y du joueur
-	double plane_x; // Plan de caméra X (pour définir le FOV)
-	double plane_y; // Plan de caméra Y (pour définir le FOV)
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
 }					t_player;
 
-// Structure pour les informations du rayon utilisé pour le raycasting
 typedef struct s_ray
 {
-	double camera_x; // Position du rayon sur le plan caméra (de -1 à 1)
-	double dir_x;    // Direction X du rayon (calculée pour chaque colonne)
-	double dir_y;    // Direction Y du rayon (calculée pour chaque colonne)
+	double			camera_x;
+	double			dir_x;
+	double			dir_y;
 	int				map_x;
-	// Coordonnée X de la grille sur laquelle le rayon est actuellement
 	int				map_y;
-	// Coordonnée Y de la grille sur laquelle le rayon est actuellement
-	int step_x;        // Direction à suivre en X (+1 ou -1)
-	int step_y;        // Direction à suivre en Y (+1 ou -1)
-	double sidedist_x; // Distance du point de départ au premier côté vertical
+	int				step_x;
+	int				step_y;
+	double			sidedist_x;
 	double			sidedist_y;
-	// Distance du point de départ au premier côté horizontal
-	double deltadist_x; // Distance entre deux côtés verticaux de la grille
-	double deltadist_y; // Distance entre deux côtés horizontaux de la grille
-	double wall_dist;   // Distance perpendiculaire du joueur au mur touché
-	int side;           // Indique quel côté du mur a été touché
+	double			deltadist_x;
+	double			deltadist_y;
+	double			wall_dist;
+	int				side;
 	int				wall_door;
 }					t_ray;
 
-// Structure principale contenant les informations du jeu
 typedef struct s_game
 {
 	int				size_y;
@@ -104,7 +112,9 @@ typedef struct s_game
 	t_ray			ray;
 	mlx_image_t		*screen;
 	mlx_t			*mlx;
-	t_animation		k_anim;
+	t_animation		f_anim;
+	t_animation		lc_anim;
+	t_animation		rc_anim;
 }					t_game;
 
 /* ========== ERROR ================*/
@@ -114,15 +124,24 @@ typedef struct s_game
 // main.c
 void				handle_input(void *param);
 void				animations(mlx_key_data_t keydata, void *param);
+void				handle_mouse(double xpos, double ypos, void *param);
+
+// free.c
+void				free_game(t_game *game);
 void				exit_game(t_game *game);
 
 // init.c
 t_game				*init_game(void);
-void				init_player(t_game *game);
 void				init_map(t_game *game);
 void				init_textures(t_game *game);
-void				print_map(char **map);
 void				init_ray(t_game *game);
+
+// init_player.c
+void				init_player(t_game *game);
+void				init_n(t_player *player, int x, int y);
+void				init_s(t_player *player, int x, int y);
+void				init_w(t_player *player, int x, int y);
+void				init_e(t_player *player, int x, int y);
 
 // line_drawing.c
 t_draw_limits		calculate_draw_limits(int line_height);
@@ -157,17 +176,17 @@ void				move_left(t_game *game);
 void				move_right(t_game *game);
 
 // minimap.c
-void				draw_minimap(t_game *game, int start_x, int start_y,
-						int tile_size);
+void				draw_minimap(t_game *game, t_xy start, int tile_size);
 int					is_valid_tile(t_game *game, int map_x, int map_y);
 uint32_t			get_tile_color(t_game *game, int map_x, int map_y);
-void				draw_tile(t_game *game, int x, int y, int tile_size,
+void				draw_tile(t_game *game, t_xy xy, int tile_size,
 						uint32_t color);
 
 // door.c
 void				open_door(t_game *game);
 
 // knife.c
-void				init_knife_animation(t_game *game);
-void				draw_animation(t_game *game);
-void				init_knife_frame(t_game *game, int nb_frames);
+void				init_knife_animation(t_animation *anim, int nb_frames,
+						char *path);
+void				draw_animation(t_game *game, t_animation *anim);
+void				init_knife_frame(t_animation *anim, char *path);

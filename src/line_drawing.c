@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_drawing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: damdam <damdam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:15:45 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/07 02:18:45 by damdam           ###   ########.fr       */
+/*   Updated: 2024/12/11 02:19:29 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_draw_limits	calculate_draw_limits(int line_height)
 {
 	t_draw_limits	limits;
 
-	// Calculer les points de début et de fin pour la ligne à dessiner
 	limits.start = -line_height / 2 + HEIGHT / 2;
 	if (limits.start < 0)
 		limits.start = 0;
@@ -55,30 +54,21 @@ void	draw_floor_and_ceiling(t_game *game)
 
 	color = rgb_to_rgba(game->ceiling_color.r, game->ceiling_color.g,
 			game->ceiling_color.b);
-	// Dessiner le plafond (moitié supérieure)
 	y = 0;
 	while (y < HEIGHT / 2)
 	{
-		x = 0;
-		while (x < WIDTH)
-		{
+		x = -1;
+		while (++x < WIDTH)
 			mlx_put_pixel(game->screen, x, y, color);
-			x++;
-		}
 		y++;
 	}
-	// Dessiner le sol (moitié inférieure)
 	color = rgb_to_rgba(game->floor_color.r, game->floor_color.g,
 			game->floor_color.b);
 	while (y < HEIGHT)
 	{
-		x = 0;
-		while (x < WIDTH)
-		{
+		x = -1;
+		while (++x < WIDTH)
 			mlx_put_pixel(game->screen, x, y, color);
-			x++;
-		}
 		y++;
 	}
 }
-

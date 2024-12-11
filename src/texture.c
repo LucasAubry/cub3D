@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:15:17 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/09 14:21:52 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 02:34:34 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 mlx_texture_t	*select_texture(t_game *game)
 {
-	// Sélection de la texture en fonction du mur touché
 	if (game->ray.wall_door == 1)
 		return (game->textures.door);
 	else if (game->ray.side == 0 && game->ray.dir_x > 0)
@@ -33,7 +32,7 @@ uint32_t	get_texture_color(mlx_texture_t *texture, int tex_x, int tex_y)
 	int			tex_offset;
 
 	if (!texture)
-		return (0xFFFFFFFF); // Blanc par défaut
+		return (0xFFFFFFFF);
 	tex_offset = (tex_y * texture->width + tex_x) * 4;
 	color = (texture->pixels[tex_offset] << 24)
 		| (texture->pixels[tex_offset + 1] << 16)

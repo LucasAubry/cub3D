@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:33 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/10 20:27:13 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 02:08:25 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,66 +15,20 @@
 t_game	*init_game(void)
 {
 	t_game	*game;
+	char	*path;
 
 	game = malloc(sizeof(t_game));
 	init_map(game);
 	init_player(game);
 	init_textures(game);
 	init_ray(game);
-	init_knife_animation(game);
+	path = "anim/rc_knife/frame";
+	init_knife_animation(&game->rc_anim, 3, path);
+	path = "anim/lc_knife/frame";
+	init_knife_animation(&game->lc_anim, 8, path);
+	path = "anim/knife_v3/frame";
+	init_knife_animation(&game->f_anim, 131, path);
 	return (game);
-}
-
-void	init_player(t_game *game)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (game->map[y])
-	{
-		while (game->map[y][x] != '\0')
-		{
-			if (game->map[y][x] == 'N' || game->map[y][x] == 'S'
-				|| game->map[y][x] == 'W' || game->map[y][x] == 'E')
-			{
-				game->player.pos_x = x + 0.5;
-				game->player.pos_y = y + 0.5;
-			}
-			if (game->map[y][x] == 'N')
-			{
-				game->player.dir_x = 0;
-				game->player.dir_y = -1;
-				game->player.plane_x = 0.66;
-				game->player.plane_y = 0;
-			}
-			if (game->map[y][x] == 'S')
-			{
-				game->player.dir_x = 0;
-				game->player.dir_y = 1;
-				game->player.plane_x = -0.66;
-				game->player.plane_y = 0;
-			}
-			if (game->map[y][x] == 'W')
-			{
-				game->player.dir_x = -1;
-				game->player.dir_y = 0;
-				game->player.plane_x = 0;
-				game->player.plane_y = 0.66;
-			}
-			if (game->map[y][x] == 'E')
-			{
-				game->player.dir_x = 1;
-				game->player.dir_y = 0;
-				game->player.plane_x = 0;
-				game->player.plane_y = -0.66;
-			}
-			x++;
-		}
-		y++;
-		x = 0;
-	}
 }
 
 void	init_map(t_game *game)
@@ -128,16 +82,4 @@ void	init_ray(t_game *game)
 	game->ray.wall_dist = 0.0;
 	game->ray.side = -1;
 	game->ray.wall_door = 0;
-}
-
-void	print_map(char **map)
-{
-	int i;
-
-	i = 0;
-	while (map[i])
-	{
-		ft_printf("%s\n", map[i]);
-		i++;
-	}
 }

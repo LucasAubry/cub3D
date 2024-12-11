@@ -6,40 +6,37 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:50:34 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/10 20:55:04 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 02:17:38 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_knife_animation(t_game *game)
+void	init_knife_animation(t_animation *anim, int nb_frames, char *path)
 {
-	game->k_anim.tot_frames = 131;
-	game->k_anim.frames = malloc(sizeof(mlx_texture_t *) * 131);
-	game->k_anim.cur_frame = 0;
-	game->k_anim.playing = 0;
-	game->k_anim.frame_delay = 50;
-	game->k_anim.last_update = 0;
-	init_knife_frame(game, game->k_anim.tot_frames);
+	anim->tot_frames = nb_frames;
+	anim->frames = malloc(sizeof(mlx_texture_t *) * nb_frames);
+	anim->cur_frame = 0;
+	anim->playing = 0;
+	init_knife_frame(anim, path);
 }
 
-void	init_knife_frame(t_game *game, int nb_frames)
+void	init_knife_frame(t_animation *anim, char *path)
 {
 	int		i;
-	char	*path;
 	char	*c;
 	char	*extension;
+	char	*act_path;
 
 	i = 0;
-	while (i < nb_frames)
+	while (i < anim->tot_frames)
 	{
-		path = "anim/knife_v3/frame";
 		c = ft_itoa(i);
 		extension = ".png";
-		path = ft_strjoin(path, c);
-		path = clean_join(path, extension);
-		game->k_anim.frames[i] = mlx_load_png(path);
-		if (!game->k_anim.frames[i])
+		act_path = ft_strjoin(path, c);
+		act_path = clean_join(act_path, extension);
+		anim->frames[i] = mlx_load_png(act_path);
+		if (!anim->frames[i])
 		{
 			ft_printf("Error loading frame %d\n", i);
 			exit(EXIT_FAILURE);
@@ -49,44 +46,52 @@ void	init_knife_frame(t_game *game, int nb_frames)
 	}
 }
 
-void	draw_animation(t_game *game)
+void	update_animation_state(t_animation *anim)
 {
-	int				screen_x;
-	int				screen_y;
-	int				x;
-	int				y;
-	mlx_texture_t	*act_frame;
-	uint32_t		color;
-	uint8_t			*pix;
+	if (anim->cur_frame == anim->tot_frames - 1)
+	{
+		anim->playing = 0;
+		anim->cur_frame = 0;
+	}
+	else if (anim->playing == 1)
+	{
+		anim->cur_frame++;
+	}
+}
 
-	if (game->k_anim.cur_frame == game->k_anim.tot_frames-1)
-	{
-		game->k_anim.playing = 0;
-		game->k_anim.cur_frame = 0;
-	}
-	if (game->k_anim.playing == 1)
-	{
-		game->k_anim.cur_frame++;
-	}
-	act_frame = game->k_anim.frames[game->k_anim.cur_frame];
-	if (!act_frame)
-		return ;
-	screen_x = (WIDTH - act_frame->width) / 2;
-	screen_y = HEIGHT - act_frame->height;
+void	draw_animation_frame(t_game *game, mlx_texture_t *frame, int screen_x,
+		int screen_y)
+{
+	int			x;
+	int			y;
+	uint32_t	color;
+	uint8_t		*pix;
+
 	y = 0;
-	while (y < (int)act_frame->height)
+	while (y < (int)frame->height)
 	{
 		x = 0;
-		while (x < (int)act_frame->width)
+		while (x < (int)frame->width)
 		{
-			pix = &act_frame->pixels[(y * act_frame->width + x) * 4];
+			pix = &frame->pixels[(y * frame->width + x) * 4];
 			color = (pix[0] << 24) | (pix[1] << 16) | (pix[2] << 8) | pix[3];
-			if ((color << 24) != 0)
-			{
+			if ((color >> 24) != 0)
 				mlx_put_pixel(game->screen, screen_x + x, screen_y + y, color);
-			}
 			x++;
 		}
 		y++;
 	}
+}
+
+void	draw_animation(t_game *game, t_animation *anim)
+{
+	mlx_texture_t	*act_frame;
+	int				screen_x;
+	int				screen_y;
+
+	update_animation_state(anim);
+	act_frame = anim->frames[anim->cur_frame];
+	screen_x = (WIDTH - act_frame->width) / 2;
+	screen_y = HEIGHT - act_frame->height;
+	draw_animation_frame(game, act_frame, screen_x, screen_y);
 }

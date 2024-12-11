@@ -6,36 +6,35 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:28:10 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/09 17:18:25 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 02:32:23 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_minimap(t_game *game, int start_x, int start_y, int tile_size)
+void	draw_minimap(t_game *game, t_xy start, int tile_size)
 {
-	int			x;
-	int			y;
+	t_xy		xy;
 	int			map_x;
 	int			map_y;
 	uint32_t	color;
 
-	y = 0;
-	while (y < 5)
+	xy.y = 0;
+	while (xy.y < 5)
 	{
-		x = 0;
-		while (x < 5)
+		xy.x = 0;
+		while (xy.x < 5)
 		{
-			map_x = start_x + x;
-			map_y = start_y + y;
+			map_x = start.x + xy.x;
+			map_y = start.y + xy.y;
 			if (is_valid_tile(game, map_x, map_y))
 			{
 				color = get_tile_color(game, map_x, map_y);
-				draw_tile(game, x, y, tile_size, color);
+				draw_tile(game, xy, tile_size, color);
 			}
-			x++;
+			xy.x++;
 		}
-		y++;
+		xy.y++;
 	}
 }
 
@@ -58,15 +57,15 @@ uint32_t	get_tile_color(t_game *game, int map_x, int map_y)
 	return (0x000000FF);
 }
 
-void	draw_tile(t_game *game, int x, int y, int tile_size, uint32_t color)
+void	draw_tile(t_game *game, t_xy xy, int tile_size, uint32_t color)
 {
 	int	screen_x;
 	int	screen_y;
 	int	py;
 	int	px;
 
-	screen_x = 10 + x * tile_size;
-	screen_y = 10 + y * tile_size;
+	screen_x = 10 + xy.x * tile_size;
+	screen_y = 10 + xy.y * tile_size;
 	py = 0;
 	while (py < tile_size)
 	{

@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:32:00 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/09 22:13:07 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 02:32:54 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ void	rotate_player(t_game *game, double angle)
 	double	old_dir_x;
 	double	old_plane_x;
 
-	// Rotation du vecteur direction
 	old_dir_x = game->player.dir_x;
 	game->player.dir_x = game->player.dir_x * cos(angle) - game->player.dir_y
 		* sin(angle);
 	game->player.dir_y = old_dir_x * sin(angle) + game->player.dir_y
 		* cos(angle);
-	// Rotation du plan caméra (plane)
 	old_plane_x = game->player.plane_x;
 	game->player.plane_x = game->player.plane_x * cos(angle)
 		- game->player.plane_y * sin(angle);
@@ -33,7 +31,6 @@ void	rotate_player(t_game *game, double angle)
 
 void	move_forward(t_game *game)
 {
-	// Vérifier que la case devant n'est pas un mur avant de déplacer
 	if (game->map[(int)(game->player.pos_y)][(int)(game->player.pos_x
 			+ game->player.dir_x * MOVE_SPEED)] != '1'
 		&& game->map[(int)(game->player.pos_y)][(int)(game->player.pos_x
@@ -65,7 +62,6 @@ void	move_left(t_game *game)
 	double	perp_x;
 	double	perp_y;
 
-	// Déplacement latéral gauche (perpendiculaire à la direction)
 	perp_x = game->player.dir_y;
 	perp_y = -game->player.dir_x;
 	if (game->map[(int)(game->player.pos_y)][(int)(game->player.pos_x + perp_x
