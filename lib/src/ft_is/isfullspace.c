@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:45:36 by dalebran          #+#    #+#             */
-/*   Updated: 2024/11/06 01:42:53 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 16:16:38 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	isfullspace(char *s)
 		return (0);
 	while (s[i])
 	{
-		if(s[i] != ' ' && (s[i] < '\t' || s[i] > '\r'))
+		if (s[i] != ' ' && (s[i] < '\t' || s[i] > '\r'))
 			return (0);
 		i++;
 	}

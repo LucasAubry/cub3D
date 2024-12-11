@@ -73,10 +73,10 @@ fclean: clean
 
 re: fclean all
 
-norminette:
-	@echo "Norminette de $(NAME) dans $(SRCDIR) et $(INCDIR)..."
-	@if norminette $(SRCDIR)/*.c $(INCDIR)/*.h | grep -v "OK!" | grep -q "Error!"; then \
-		norminette $(SRCDIR)/*.c $(INCDIR)/*.h | grep -v "OK!" | \
+n:
+	@echo "Norminette of $(NAME) (ignoring .gitignore)..."
+	@if norminette --use-gitignore | grep -v "OK!" | grep -q "Error!"; then \
+		norminette --use-gitignore  | grep -v "OK!" | \
 		while read line; do \
 			if echo $$line | grep -q "Error!"; then \
 				echo "\033[0;31m$$line\033[0m"; \
