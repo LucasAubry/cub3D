@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:50:34 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 02:17:38 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 02:49:20 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_knife_frame(t_animation *anim, char *path)
 			exit(EXIT_FAILURE);
 		}
 		free(c);
+		free(act_path);
 		i++;
 	}
 }
