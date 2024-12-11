@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:16:48 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 18:16:50 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 21:27:21 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,5 @@ void	verif_flood(t_game *game)
 	temp_map = copy_map(game->map);
 	player_position(game, game->map, &i, &j);
 	flood_fill(game, temp_map, i, j);
+	free_map(temp_map);
 }

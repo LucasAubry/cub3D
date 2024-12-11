@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:18:02 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 18:18:03 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 20:26:58 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,21 @@ int	have_char(char *line)
 	return (0);
 }
 
-int	map_in_game(t_game *game, char *line, int fd, int len)
+int	map_in_game(t_game *game, char **line, int fd, int len)
 {
 	game->map = malloc(sizeof(char *) * len);
-	line = skip_empty_line(line, &fd);
+	skip_empty_line(&(*line), &fd);
 	len = 0;
-	while (line != NULL)
+	while (*line != NULL)
 	{
-		if (!line_is_space(line))
+		if (!line_is_space(*line))
 			break ;
-		game->map[len] = ft_strtrim(line, "\n");
-		free(line);
-		line = ft_get_next_line(fd);
+		game->map[len] = ft_strtrim(*line, "\n");
+		free(*line);
+		*line = ft_get_next_line(fd);
 		len++;
 	}
-	if (line != NULL)
+	if (*line != NULL)
 		return (0);
 	game->map[len] = NULL;
 	return (1);

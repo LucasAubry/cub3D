@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 02:36:36 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 18:14:10 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 22:05:11 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,21 +149,20 @@ int					fc_in_game(t_game *game, char **fc);
 int					texture_in_game(t_game *game, char **texture);
 int					texture_in_game(t_game *game, char **texture);
 // map
-int					map_in_game(t_game *game, char *line, int fd, int len);
+int					map_in_game(t_game *game, char **line, int fd, int len);
 char				*file_to_tab(int fd, char **texture, char **fc);
 // verif map
 int					verif_map(char **map);
 void				verif_flood(t_game *game);
-
+void				free_texture(char **map, int taille);
 int					verif_map(char **map);
-char				*skip_empty_line(char *line, int *fd);
 
 // tools:
 int					is_number(char c);
 int					line_is_space(char *line);
 int					check_char(char c);
 int					check_fd(int fd);
-char				*skip_empty_line(char *line, int *fd);
+void				skip_empty_line(char **line, int *fd);
 void				len_of_map(t_game *game, char **map);
 void				bz(int *tab, int n);
 

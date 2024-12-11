@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:17:02 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 18:17:02 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 22:16:11 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ int	len_of_file(int fd)
 	line = ft_get_next_line(fd);
 	while (line != NULL)
 	{
+		free(line);
 		line = ft_get_next_line(fd);
 		len++;
 	}
+	free(line);
 	return (len);
 }
 
@@ -66,13 +68,8 @@ int	file_order(t_game *game, int fd)
 	line = file_to_tab(fd, texture, fc);
 	if (line == NULL)
 		return (0);
-	if (!is_space111(line))
-		return (0);
-	if (!texture_in_game(game, texture))
-		return (0);
-	if (!fc_in_game(game, fc))
-		return (0);
-	if (!map_in_game(game, line, fd, len))
-		return (0);
-	return (1);
+	if (!is_space111(line) || !texture_in_game(game, texture)
+		|| !fc_in_game(game, fc) || !map_in_game(game, &line, fd, len))
+		return (free(line), free_texture(texture, 4), free_texture(fc, 2), 0);
+	return (free(line), free_texture(texture, 4), 1);
 }

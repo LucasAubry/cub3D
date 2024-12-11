@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:18:05 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 18:18:05 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 20:47:00 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	verif_texture(char **texture)
 char	**path_to_texture(char **texture)
 {
 	char	*path;
-	char	*new_texture;
+	//char	*new_texture;
 	int		i;
 
 	i = 0;
@@ -49,11 +49,11 @@ char	**path_to_texture(char **texture)
 		path = ft_strtrim(path, "\n");
 		if (path)
 		{
-			new_texture = ft_strdup(path);
 			free(texture[i]);
-			texture[i] = ft_strdup(new_texture);
-			free(new_texture);
+			texture[i] = ft_strdup(path);
+			//free(new_texture);
 		}
+		free(path);
 		i++;
 	}
 	return (texture);

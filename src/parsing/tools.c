@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:16:59 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 18:17:00 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 20:26:14 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@ int	check_fd(int fd)
 		return (1);
 }
 
-char	*skip_empty_line(char *line, int *fd)
+void	skip_empty_line(char **line, int *fd)
 {
-	while (line != NULL && !line_is_space(line))
+	while (line != NULL && !line_is_space(*line))
 	{
-		line = ft_get_next_line(*fd);
+		free(*line);
+		*line = ft_get_next_line(*fd);
+		printf("line : %s\n", *line);
 	}
-	return (line);
 }

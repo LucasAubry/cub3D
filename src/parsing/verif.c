@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:17:06 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 18:17:07 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 22:18:51 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	put_in_game(char *line, char **texture, char **fc, int index)
 {
 	if (index >= 0 && index <= 3)
-		texture[index] = line;
+		texture[index] = ft_strdup(line);
 	else if (index == 4 || index == 5)
-		fc[index - 4] = line;
+		fc[index - 4] = ft_strdup(line);
 	return (1);
 }
 
@@ -41,8 +41,8 @@ int	check_id(char *line, char **texture, char **fc, int *verif)
 	else if (!ft_strcmp(*id, "C"))
 		*verif += put_in_game(line, texture, fc, 5);
 	else if (!ft_strcmp(*id, "\n"))
-		return (0);
-	return (1);
+		return (free_map(id), 0);
+	return (free_map(id), 1);
 }
 
 int	add_in_tab(char *line, char **texture, char **fc, int *verif)
@@ -68,12 +68,14 @@ char	*file_to_tab(int fd, char **texture, char **fc)
 	i = 0;
 	verif = 0;
 	line = ft_get_next_line(fd);
-	line = skip_empty_line(line, &fd);
+	skip_empty_line(&line, &fd);
 	while (line != NULL)
 	{
 		trim_line = ft_strtrim(line, " ");
+		free(line);
 		line = ft_get_next_line(fd);
 		i = add_in_tab(trim_line, texture, fc, &verif);
+		free(trim_line);
 		if (i == 0)
 			return (NULL);
 		else if (verif < 6 && i == 2)
