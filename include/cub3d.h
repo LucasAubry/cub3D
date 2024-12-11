@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 02:36:36 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 16:49:24 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:14:10 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,12 @@ typedef struct s_game
 	t_animation		f_anim;
 	t_animation		lc_anim;
 	t_animation		rc_anim;
+	char			*path_file;
 }					t_game;
-
 
 /* ========== ERROR ================*/
 
-#define	FD "Error | fd"
+#define FD "Error | fd"
 #define FILES "Error | The file is not correct"
 #define NOT_CUB "Error | File need be a .cub"
 #define FILE_NOT_CORRECT "Error | The file name is not correct"
@@ -138,46 +138,42 @@ typedef struct s_game
 void				handle_input(void *param);
 void				animations(mlx_key_data_t keydata, void *param);
 void				handle_mouse(double xpos, double ypos, void *param);
-int	parsing(t_game *game, char **argv);
-int	check_fd(int fd);
-int	file_order(t_game *game, int fd);
+int					parsing(t_game *game, char **argv);
+int					check_fd(int fd);
+int					file_order(t_game *game, int fd);
 
-//fc
-int	fc_in_game(t_game *game, char **fc);
-int	fc_in_game(t_game *game, char **fc);
-//texture
-int	texture_in_game(t_game *game, char **texture);
-int	texture_in_game(t_game *game, char **texture);
-//map
-int	map_in_game(t_game *game, char *line, int fd, int len);
-char	*file_to_tab(int fd, char **texture, char **fc);
-//verif map
-int	verif_map(char **map);
-void	verif_flood(t_game *game);
+// fc
+int					fc_in_game(t_game *game, char **fc);
+int					fc_in_game(t_game *game, char **fc);
+// texture
+int					texture_in_game(t_game *game, char **texture);
+int					texture_in_game(t_game *game, char **texture);
+// map
+int					map_in_game(t_game *game, char *line, int fd, int len);
+char				*file_to_tab(int fd, char **texture, char **fc);
+// verif map
+int					verif_map(char **map);
+void				verif_flood(t_game *game);
 
+int					verif_map(char **map);
+char				*skip_empty_line(char *line, int *fd);
 
-
-
-
-int	verif_map(char **map);
-char	*skip_empty_line(char *line, int *fd);
-
-
-//tools:
-int	is_number(char c);
-int	line_is_space(char *line);
-int	check_char(char	c);
-int	check_fd(int fd);
-char	*skip_empty_line(char *line, int *fd);
-void	len_of_map(t_game *game, char **map);
+// tools:
+int					is_number(char c);
+int					line_is_space(char *line);
+int					check_char(char c);
+int					check_fd(int fd);
+char				*skip_empty_line(char *line, int *fd);
+void				len_of_map(t_game *game, char **map);
+void				bz(int *tab, int n);
 
 // free.c
 void				free_game(t_game *game);
 void				exit_game(t_game *game);
 
 // init.c
-t_game				*init_game(void);
-void				init_map(t_game *game);
+void				init_game(t_game *game);
+void				init_screen(t_game *game);
 void				init_textures(t_game *game);
 void				init_ray(t_game *game);
 

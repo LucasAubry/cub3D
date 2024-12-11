@@ -6,64 +6,34 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:33 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/11 02:08:25 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:07:54 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_game	*init_game(void)
+void	init_game(t_game *game)
 {
-	t_game	*game;
 	char	*path;
 
-	game = malloc(sizeof(t_game));
-	init_map(game);
+	init_screen(game);
 	init_player(game);
-	init_textures(game);
 	init_ray(game);
+	game->textures.door = mlx_load_png("img/door.png");
 	path = "anim/rc_knife/frame";
 	init_knife_animation(&game->rc_anim, 3, path);
 	path = "anim/lc_knife/frame";
 	init_knife_animation(&game->lc_anim, 8, path);
 	path = "anim/knife_v3/frame";
 	init_knife_animation(&game->f_anim, 131, path);
-	return (game);
 }
 
-void	init_map(t_game *game)
+void	init_screen(t_game *game)
 {
-	int		i;
-	char	*raw_map[] = {"1111111111\0", "1000000001\0", "1010201101\0",
-			"1N00000001\0", "1111111111\0", NULL};
-
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (!game->mlx)
 		(free(game), exit(0));
 	game->screen = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->map = malloc(sizeof(char *) * 6);
-	i = 0;
-	while (raw_map[i])
-	{
-		game->map[i] = ft_strdup(raw_map[i]);
-		i++;
-	}
-	game->map[i] = NULL;
-}
-
-void	init_textures(t_game *game)
-{
-	game->ceiling_color.r = 50;
-	game->ceiling_color.g = 50;
-	game->ceiling_color.b = 50;
-	game->floor_color.r = 20;
-	game->floor_color.g = 20;
-	game->floor_color.b = 20;
-	game->textures.n = mlx_load_png("img/blue_wall.png");
-	game->textures.s = mlx_load_png("img/purple_wall.png");
-	game->textures.e = mlx_load_png("img/grey_wall.png");
-	game->textures.w = mlx_load_png("img/yellow_wall.png");
-	game->textures.door = mlx_load_png("img/door.png");
 }
 
 void	init_ray(t_game *game)

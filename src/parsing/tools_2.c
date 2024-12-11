@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   tools_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 19:56:20 by laubry            #+#    #+#             */
-/*   Updated: 2024/12/11 18:16:25 by dalebran         ###   ########.fr       */
+/*   Created: 2024/12/11 18:16:56 by dalebran          #+#    #+#             */
+/*   Updated: 2024/12/11 18:17:43 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-char	*ft_strstr(const char *haystack, const char *needle)
+void	len_of_map(t_game *game, char **map)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
 
-	if (!*needle)
-		return ((char *)haystack);
 	i = 0;
-	while (haystack[i])
+	while (map[i])
+		i++;
+	game->size_y = i;
+}
+
+void	bz(int *tab, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i != n)
 	{
-		j = 0;
-		while (needle[j] && haystack[i + j] == needle[j])
-			j++;
-		if (!needle[j])
-			return ((char *)haystack + i);
+		tab[i] = 0;
 		i++;
 	}
-	return (NULL);
 }

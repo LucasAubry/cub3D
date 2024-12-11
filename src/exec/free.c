@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 02:21:26 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 02:53:05 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:08:36 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	free_game(t_game *game)
 		i++;
 	}
 	free(game->map);
+	free(game->path_file);
 	free_anim(game);
 	mlx_delete_texture(game->textures.n);
 	mlx_delete_texture(game->textures.s);

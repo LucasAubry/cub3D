@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   flood_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 18:16:48 by dalebran          #+#    #+#             */
+/*   Updated: 2024/12/11 18:16:50 by dalebran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	calc_row_map(char **map)
@@ -51,7 +63,12 @@ void	player_position(t_game *game, char **map, int *i, int *j)
 
 void	flood_fill(t_game *game, char **map, int x, int y)
 {
-	if (y == game->size_y -1 || map[x][y] == '\0' || map[x][y] == ' ')
+	if (x < 0 || y < 0 || x >= game->size_y || y >= (int)ft_strlen(map[x]))
+	{
+		ft_error("%s\n", CLOSE_MAP);
+		exit(1);
+	}
+	if (map[x][y] == '\0' || map[x][y] == ' ')
 	{
 		ft_error("%s\n", CLOSE_MAP);
 		exit(1);
