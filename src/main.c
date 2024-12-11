@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 			return (0);
 		}
 	
-		
 		int	i = 0;
 		while (game->map[i])
 		{
@@ -41,5 +40,6 @@ int	main(int argc, char **argv)
 		printf("%p\n", (void *)game->textures.s);
 		printf("%p\n", (void *)game->textures.w);
 		printf("%p\n", (void *)game->textures.e);
+	//	free_all(game);
 	}
 }

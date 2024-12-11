@@ -32,7 +32,6 @@ typedef struct s_textures
 typedef struct s_game
 {
 	int	size_y;
-	int	size_x;
 
 	t_textures    textures;
 	t_color        floor_color;
@@ -57,6 +56,7 @@ typedef struct s_game
 #define COMMA "Error | Too much number for rgb"
 #define CHAR_RGB "Error | Only number for rgb"
 #define DOUBLON_FILE "Error | Doublon in file"
+#define CLOSE_MAP "Error | The map is not closed"
 
 /* ========== FONCTION ============ */
 
@@ -75,6 +75,8 @@ int	map_in_game(t_game *game, char *line, int fd, int len);
 char	*file_to_tab(int fd, char **texture, char **fc);
 //verif map
 int	verif_map(char **map);
+void	verif_flood(t_game *game);
+
 
 
 
@@ -89,6 +91,12 @@ int	line_is_space(char *line);
 int	check_char(char	c);
 int	check_fd(int fd);
 char	*skip_empty_line(char *line, int *fd);
+void	len_of_map(t_game *game, char **map);
+
 
 
 #endif
+
+
+
+//verif si pas de joueur

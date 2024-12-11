@@ -42,6 +42,7 @@ int	map(t_game *game, char **argv)
 		ft_error("%s\n", FILES);
 		return (0);
 	}
+	len_of_map(game, game->map);	
 	return (1);
 }
 
@@ -52,11 +53,7 @@ int	check_map(t_game *game)
 		ft_error("%s\n", BAD_CHAR);
 		return (0);
 	}
-//	if (!border_wall(game->map))
-//	{
-//		ft_error("%s\n", BORDER_WALL);
-//		return (0);
-//	}
+	verif_flood(game);
 	return (1);
 }
 

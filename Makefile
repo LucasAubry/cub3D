@@ -18,6 +18,8 @@ FILES = main \
 		verif_map \
 		parsing \
 		tools \
+		tools_2 \
+		flood_map \
 		in_game/fc_in_game \
 		in_game/map_in_game \
 		in_game/texture_in_game

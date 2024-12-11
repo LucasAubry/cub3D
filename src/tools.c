@@ -23,9 +23,9 @@ int	line_is_space(char *line)
 
 int	check_char(char c)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == '0' || c == '1' || c == ' ')
+	if (c == 'N' || c == 'S' || c == 'E' || c == '0' || c == '1' || c == ' '
+		|| c == 'W')
 		return (1);
-	printf("dslkfjdlk\n");
 	return (0);
 }
 
