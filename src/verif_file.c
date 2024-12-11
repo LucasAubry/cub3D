@@ -15,7 +15,7 @@ int	len_of_file(int fd)
 	return (len);
 }
 
-void	texture_to_NULL(char **texture, char **fc)
+void	texture_to_null(char **texture, char **fc)
 {
 	texture[0] = NULL;
 	texture[1] = NULL;
@@ -33,7 +33,7 @@ int	is_space111(char *line)
 	while (line[i])
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != ' '
-				&& line[i] != '\n' && line[i] != '\0')
+			&& line[i] != '\n' && line[i] != '\0')
 			return (0);
 		i++;
 	}
@@ -47,12 +47,10 @@ int	file_order(t_game *game, int fd)
 	char	*fc[2];
 	int		len;
 
-
-	texture_to_NULL(texture, fc);
+	texture_to_null(texture, fc);
 	len = len_of_file(fd);
 	close(fd);
 	fd = open(game->path_file, O_RDONLY);
-
 	line = file_to_tab(fd, texture, fc);
 	if (line == NULL)
 		return (0);

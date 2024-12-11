@@ -11,8 +11,8 @@ int	verif_texture(char **texture)
 		j = 2;
 		while (texture[i][j] != '\0')
 		{
-			if (texture[i][j] == '.' && texture[i][j+1] == '/')
-				break;
+			if (texture[i][j] == '.' && texture[i][j +1] == '/')
+				break ;
 			if (texture[i][j] != ' ' && texture[i][j] != '\t')
 				return (0);
 			j++;
@@ -52,12 +52,12 @@ int	texture_in_game(t_game *game, char **texture)
 	if (!verif_texture(texture))
 		return (0);
 	texture = path_to_texture(texture);
-    game->textures.n = mlx_load_png(texture[0]);
-    game->textures.s = mlx_load_png(texture[1]);
-    game->textures.e = mlx_load_png(texture[2]);
-    game->textures.w = mlx_load_png(texture[3]);
-	if (game->textures.n == NULL || game->textures.s == NULL ||
-			game->textures.e == NULL || game->textures.w == NULL)
+	game->textures.n = mlx_load_png(texture[0]);
+	game->textures.s = mlx_load_png(texture[1]);
+	game->textures.e = mlx_load_png(texture[2]);
+	game->textures.w = mlx_load_png(texture[3]);
+	if (game->textures.n == NULL || game->textures.s == NULL
+		|| game->textures.e == NULL || game->textures.w == NULL)
 		return (0);
 	return (1);
 }

@@ -31,9 +31,8 @@ char	**copy_map(char **map)
 	return (copy_map);
 }
 
-void	player_position(t_game *game, char **map, int *i , int *j)
+void	player_position(t_game *game, char **map, int *i, int *j)
 {
-
 	*i = 0;
 	while (*i < game->size_y)
 	{
@@ -50,20 +49,20 @@ void	player_position(t_game *game, char **map, int *i , int *j)
 	return ;
 }
 
-void    flood_fill(t_game *game, char **map, int x, int y)
+void	flood_fill(t_game *game, char **map, int x, int y)
 {
 	if (y == game->size_y -1 || map[x][y] == '\0' || map[x][y] == ' ')
 	{
 		ft_error("%s\n", CLOSE_MAP);
 		exit(1);
 	}
-    if (map[x][y] == '1' || map[x][y] == 'X')
+	if (map[x][y] == '1' || map[x][y] == 'X')
 		return ;
 	map[x][y] = 'X';
-    flood_fill(game, map, x - 1, y);
-    flood_fill(game, map, x + 1, y);
-    flood_fill(game, map, x, y - 1);
-    flood_fill(game, map, x, y + 1);
+	flood_fill(game, map, x - 1, y);
+	flood_fill(game, map, x + 1, y);
+	flood_fill(game, map, x, y - 1);
+	flood_fill(game, map, x, y + 1);
 }
 
 void	verif_flood(t_game *game)

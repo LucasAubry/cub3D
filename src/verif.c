@@ -9,35 +9,35 @@ int	put_in_game(char *line, char **texture, char **fc, int index)
 	return (1);
 }
 
-
-int	check_id(char *line, char *id, char **texture, char **fc, int *verif)
+int	check_id(char *line, char **texture, char **fc, int *verif)
 {
-	if (!ft_strcmp(id, "NO"))
+	char			**id;
+
+	id = ft_split(line, ' ');
+	if (id == NULL)
+		return (0);
+	if (!ft_strcmp(*id, "NO"))
 		*verif += put_in_game(line, texture, fc, 0);
-	else if (!ft_strcmp(id, "SO"))
+	else if (!ft_strcmp(*id, "SO"))
 		*verif += put_in_game(line, texture, fc, 1);
-	else if (!ft_strcmp(id, "WE"))
+	else if (!ft_strcmp(*id, "WE"))
 		*verif += put_in_game(line, texture, fc, 2);
-	else if (!ft_strcmp(id, "EA"))
+	else if (!ft_strcmp(*id, "EA"))
 		*verif += put_in_game(line, texture, fc, 3);
-	else if (!ft_strcmp(id, "F"))
+	else if (!ft_strcmp(*id, "F"))
 		*verif += put_in_game(line, texture, fc, 4);
-	else if (!ft_strcmp(id, "C"))
+	else if (!ft_strcmp(*id, "C"))
 		*verif += put_in_game(line, texture, fc, 5);
-	else if (!ft_strcmp(id, "\n"))
+	else if (!ft_strcmp(*id, "\n"))
 		return (0);
 	return (1);
 }
 
 int	add_in_tab(char *line, char **texture, char **fc, int *verif)
 {
-	char			**id;
 	static int		i = 0;
 
-	id = ft_split(line, ' ');
-	if (id == NULL)
-		i += 0;
-	else if (check_id(line, *id, texture, fc, verif) == 1)
+	if (check_id(line, texture, fc, verif) == 1)
 		i += 1;
 	if (i > 6)
 		return (0);
@@ -63,17 +63,11 @@ char	*file_to_tab(int fd, char **texture, char **fc)
 		line = ft_get_next_line(fd);
 		i = add_in_tab(trim_line, texture, fc, &verif);
 		if (i == 0)
-		{
-			printf("error file not gooood");
 			return (NULL);
-		}
 		else if (verif < 6 && i == 2)
-		{
-			printf("Error need all arguments");
 			return (NULL);
-		}
 		else if (i == 2)
-			break;
+			break ;
 	}
 	return (line);
 }

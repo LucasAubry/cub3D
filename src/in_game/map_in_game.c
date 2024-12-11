@@ -16,18 +16,17 @@ int	have_char(char *line)
 
 int	map_in_game(t_game *game, char *line, int fd, int len)
 {
-
 	game->map = malloc(sizeof(char *) * len);
 	line = skip_empty_line(line, &fd);
 	len = 0;
 	while (line != NULL)
 	{
 		if (!line_is_space(line))
-			break;	
+			break ;
 		game->map[len] = ft_strtrim(line, "\n");
 		free(line);
-	    line = ft_get_next_line(fd);
-	    len++;
+		line = ft_get_next_line(fd);
+		len++;
 	}
 	if (line != NULL)
 		return (0);
