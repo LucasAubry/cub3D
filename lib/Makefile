@@ -6,7 +6,7 @@
 #    By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/16 14:53:09 by dalebran          #+#    #+#              #
-#    Updated: 2024/11/06 00:50:24 by dalebran         ###   ########.fr        #
+#    Updated: 2024/12/06 22:59:00 by laubry           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,11 @@ SRC_IS = ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint isdotorslash \
 SRC_STR = ft_strlen ft_strlcpy ft_strlcat ft_strchr ft_strrchr \
 			ft_strnstr ft_strncmp ft_substr ft_strjoin ft_strtrim \
 			ft_split ft_strmapi ft_striteri ft_strdup ft_strcmp \
-			clean_join
+			clean_join ft_strstr
 SRC_MEM = ft_memset ft_bzero ft_memcpy ft_memmove ft_memchr \
 			ft_memcmp ft_calloc
-SRC_TO = ft_atoi ft_atol ft_toupper ft_tolower ft_itoa ft_tobase16 ft_utoa
+SRC_TO = ft_atoi ft_atol ft_toupper ft_tolower ft_itoa ft_tobase16 ft_utoa \
+			ft_atoiu
 SRC_LST = ft_lstnew ft_lstadd_front ft_lstsize ft_lstlast \
 			ft_lstadd_back ft_lstdelone ft_lstclear ft_lstiter \
 			ft_lstmap free_node

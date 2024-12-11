@@ -14,7 +14,18 @@ LIBS = $(LIBFT) $(LIBMLX) -lglfw -pthread -lm
 #------------------------Source-----------------------------
 
 # Sources and objects
-FILESEXEC = main init line_drawing raycasting render texture move minimap door knife init_player free\
+FILESEXEC = main init line_drawing raycasting render texture move minimap door knife init_player free
+FILES = main \
+		verif \
+		verif_file \
+		verif_map \
+		parsing \
+		tools \
+		tools_2 \
+		flood_map \
+		in_game/fc_in_game \
+		in_game/map_in_game \
+		in_game/texture_in_game
 
 SRCS = $(addprefix src/exec/, $(addsuffix .c, $(FILESEXEC)))
 OBJS = $(addprefix obj/exec/, $(addsuffix .o, $(FILESEXEC)))
@@ -33,6 +44,7 @@ all: $(LIBFT) $(LIBMLX) $(NAME)
 
 obj:
 	mkdir -p obj/exec
+	mkdir -p obj/in_game
 
 $(LIBFT):
 	@$(MAKE) --quiet -C $(LIB)
