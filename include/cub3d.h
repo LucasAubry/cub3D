@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 02:36:36 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 22:05:11 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:06:05 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ int					check_fd(int fd);
 void				skip_empty_line(char **line, int *fd);
 void				len_of_map(t_game *game, char **map);
 void				bz(int *tab, int n);
+void				free_parsing(t_game *game);
 
 // free.c
 void				free_game(t_game *game);

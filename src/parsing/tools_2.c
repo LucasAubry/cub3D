@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:16:56 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 22:04:59 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:05:39 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,18 @@ void	free_texture(char **map, int taille)
 		free(map[i]);
 		i++;
 	}
+}
+
+void	free_parsing(t_game *game)
+{
+	if (game->textures.n != NULL)
+		mlx_delete_texture(game->textures.n);
+	if (game->textures.s != NULL)
+		mlx_delete_texture(game->textures.s);
+	if (game->textures.e != NULL)
+		mlx_delete_texture(game->textures.e);
+	if (game->textures.w != NULL)
+		mlx_delete_texture(game->textures.w);
+	free(game->path_file);
+	free_map(game->map);
 }

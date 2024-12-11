@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:18:05 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 20:47:00 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:04:32 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	texture_in_game(t_game *game, char **texture)
 	game->textures.w = mlx_load_png(texture[3]);
 	if (game->textures.n == NULL || game->textures.s == NULL
 		|| game->textures.e == NULL || game->textures.w == NULL)
+	{
 		return (0);
+	}
 	return (1);
 }

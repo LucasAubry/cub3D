@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:16:51 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 18:16:54 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:02:22 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ int	parsing(t_game *game, char **argv)
 		printf("VERIF_MAP\n");
 		return (0);
 	}
-	printf("tout bon parsig\n");
+	printf("pars OK\n");
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:16:48 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 21:27:21 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:11:13 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,17 @@ void	flood_fill(t_game *game, char **map, int x, int y)
 	if (x < 0 || y < 0 || x >= game->size_y || y >= (int)ft_strlen(map[x]))
 	{
 		ft_error("%s\n", CLOSE_MAP);
+		free_map(map);
+		free_parsing(game);
+		free(game);
 		exit(1);
 	}
 	if (map[x][y] == '\0' || map[x][y] == ' ')
 	{
 		ft_error("%s\n", CLOSE_MAP);
+		free_map(map);
+		free_parsing(game);
+		free(game);
 		exit(1);
 	}
 	if (map[x][y] == '1' || map[x][y] == 'X')

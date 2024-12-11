@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:18:17 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 18:18:18 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:05:50 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,11 @@ int	main(int argc, char **argv)
 		if (!parsing(game, argv))
 		{
 			printf("MAIN PARSING");
+			free_parsing(game);
+			free(game);
 			return (0);
 		}
-		init_game(game);	
+		init_game(game);
 		mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 		mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
 		mlx_cursor_hook(game->mlx, handle_mouse, game);
