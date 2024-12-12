@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:33 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/12 05:35:19 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/12 05:41:38 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_screen(t_game *game)
 {
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (!game->mlx)
-		(free(game), exit(0));
+		(free_game(game), free(game), exit(0));
 	game->screen = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 }
 
