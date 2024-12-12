@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 02:36:36 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/12 00:38:49 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/12 05:31:35 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,11 @@ void				bz(int *tab, int n);
 void				free_parsing(t_game *game);
 
 // free.c
+void				free_anim(t_animation *anim, int nb_frame_init);
+void				free_anims(t_game *game);
+void				free_anims_tmp(t_game *game, int nb_anim,
+						int nb_frame_init);
+void				free_game_tmp(t_game *game, int nb_anim, int nb_frame_init);
 void				free_game(t_game *game);
 void				exit_game(t_game *game);
 
@@ -226,7 +231,8 @@ void				draw_tile(t_game *game, t_xy xy, int tile_size,
 void				open_door(t_game *game);
 
 // knife.c
-void				init_knife_animation(t_animation *anim, int nb_frames,
-						char *path);
+void				init_knife_animation(t_game *game, t_animation *anim,
+						int nb_frames, char *path);
 void				draw_animation(t_game *game, t_animation *anim);
-void				init_knife_frame(t_animation *anim, char *path);
+void				init_knife_frame(t_game *game, t_animation *anim,
+						char *path);

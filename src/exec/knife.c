@@ -6,27 +6,29 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:50:34 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 02:49:20 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/12 05:33:55 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_knife_animation(t_animation *anim, int nb_frames, char *path)
+void	init_knife_animation(t_game *game, t_animation *anim, int nb_frames,
+		char *path)
 {
 	anim->tot_frames = nb_frames;
 	anim->frames = malloc(sizeof(mlx_texture_t *) * nb_frames);
 	anim->cur_frame = 0;
 	anim->playing = 0;
-	init_knife_frame(anim, path);
+	init_knife_frame(game, anim, path);
 }
 
-void	init_knife_frame(t_animation *anim, char *path)
+void	init_knife_frame(t_game *game, t_animation *anim, char *path)
 {
-	int		i;
-	char	*c;
-	char	*extension;
-	char	*act_path;
+	int			i;
+	char		*c;
+	char		*extension;
+	char		*act_path;
+	static int	nb_anim_init = 0;
 
 	i = 0;
 	while (i < anim->tot_frames)
@@ -38,13 +40,15 @@ void	init_knife_frame(t_animation *anim, char *path)
 		anim->frames[i] = mlx_load_png(act_path);
 		if (!anim->frames[i])
 		{
-			ft_printf("Error loading frame %d\n", i);
+			(free(c), free(act_path), free_game_tmp(game, nb_anim_init, i));
+			free(game);
 			exit(EXIT_FAILURE);
 		}
 		free(c);
 		free(act_path);
 		i++;
 	}
+	nb_anim_init++;
 }
 
 void	update_animation_state(t_animation *anim)

@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:33 by damdam            #+#    #+#             */
-/*   Updated: 2024/12/11 18:07:54 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/12 05:35:19 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ void	init_game(t_game *game)
 {
 	char	*path;
 
+	game->textures.door = mlx_load_png("img/door.png");
+	path = "anim/rc_knife/frame";
+	init_knife_animation(game, &game->rc_anim, 3, path);
+	path = "anim/lc_knife/frame";
+	init_knife_animation(game, &game->lc_anim, 8, path);
+	path = "anim/knife_v3/frame";
+	init_knife_animation(game, &game->f_anim, 131, path);
 	init_screen(game);
 	init_player(game);
 	init_ray(game);
-	game->textures.door = mlx_load_png("img/door.png");
-	path = "anim/rc_knife/frame";
-	init_knife_animation(&game->rc_anim, 3, path);
-	path = "anim/lc_knife/frame";
-	init_knife_animation(&game->lc_anim, 8, path);
-	path = "anim/knife_v3/frame";
-	init_knife_animation(&game->f_anim, 131, path);
 }
 
 void	init_screen(t_game *game)
@@ -52,4 +52,13 @@ void	init_ray(t_game *game)
 	game->ray.wall_dist = 0.0;
 	game->ray.side = -1;
 	game->ray.wall_door = 0;
+}
+
+void	exit_game(t_game *game)
+{
+	mlx_close_window(game->mlx);
+	free_game(game);
+	mlx_terminate(game->mlx);
+	free(game);
+	exit(EXIT_SUCCESS);
 }
