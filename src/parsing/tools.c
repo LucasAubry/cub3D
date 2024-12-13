@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:16:59 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/13 16:55:20 by laubry           ###   ########.fr       */
+/*   Updated: 2024/12/13 20:36:47 by laubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	line_is_space(char *line)
 int	check_char(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == '0' || c == '1' || c == ' '
-		|| c == 'W')
+		|| c == 'W' || c == '2')
 		return (1);
 	return (0);
 }
