@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:18:05 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/12 00:11:34 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:36:10 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	verif_texture(char **texture)
 		j = 2;
 		while (texture[i][j] != '\0')
 		{
-			if (texture[i][j] == '.' && texture[i][j +1] == '/')
+			if (texture[i][j] == '.' && texture[i][j + 1] == '/')
 				break ;
 			if (texture[i][j] != ' ' && texture[i][j] != '\t')
 				return (0);
@@ -38,22 +38,26 @@ int	verif_texture(char **texture)
 
 char	**path_to_texture(char **texture)
 {
-	char	*path;
+	char	**path;
 	int		i;
 
 	i = 0;
 	while (i != 4)
 	{
-		path = ft_strstr(texture[i], "./");
-		path = ft_strtrim(path, "\n");
-		if (path)
+		printf("texture[%d] : %s\n", i, texture[i]);
+		path = ft_split(texture[i], ' ');
+		path[1] = ft_strtrim(path[1], "\n");
+		if (path[1])
 		{
 			free(texture[i]);
-			texture[i] = ft_strdup(path);
+			texture[i] = ft_strdup(path[1]);
 		}
-		free(path);
 		i++;
 	}
+	i = 0;
+	while (path[i])
+		free(path[i++]);
+	free(path);
 	return (texture);
 }
 

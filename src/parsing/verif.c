@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:17:06 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 23:45:34 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:25:08 by dalebran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,18 @@
 int	put_in_game(char *line, char **texture, char **fc, int index)
 {
 	if (index >= 0 && index <= 3)
+	{
+		if (texture[index])
+			free(texture[index]);
 		texture[index] = ft_strdup(line);
+	}
 	else if (index == 4 || index == 5)
+	{
+		if (fc[index - 4])
+			free(fc[index - 4]);
 		fc[index - 4] = ft_strdup(line);
+
+	}
 	return (1);
 }
 
