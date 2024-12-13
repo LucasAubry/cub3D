@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:49:25 by dalebran          #+#    #+#             */
-/*   Updated: 2023/10/18 09:41:48 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:22:40 by laubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,30 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (result * sign);
+}
+
+int	ft_atoi_256(const char *str)
+{
+	int	tab[4];
+
+	tab[0] = 0;
+	tab[1] = 1;
+	tab[2] = 0;
+	while (str[tab[0]] == ' ' || ('\t' <= str[tab[0]] && str[tab[0]] <= '\r'))
+		tab[0]++;
+	if (str[tab[0]] == '-' || str[tab[0]] == '+')
+	{
+		if (str[tab[0]] == '-')
+			tab[1] = -tab[1];
+		tab[0]++;
+	}
+	tab[3] = tab[0];
+	while (str[tab[0]] >= '0' && str[tab[0]] <= '9')
+	{
+		tab[2] = tab[2] * 10 + (str[tab[0]] - '0');
+		tab[0]++;
+	}
+	if ((tab[0] - tab[3]) > 3)
+		return (256);
+	return (tab[2] * tab[1]);
 }

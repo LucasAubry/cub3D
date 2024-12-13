@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:17:06 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/13 16:40:11 by laubry           ###   ########.fr       */
+/*   Updated: 2024/12/13 20:14:43 by laubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	verif_255(char *fc[2])
 		token = fc[i] + 2;
 		while (token)
 		{
-			value = ft_atoi(token);
+			value = ft_atoi_256(token);
 			if (value > 255)
 				return (0);
 			token = ft_strchr(token, ',');
