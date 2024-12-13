@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:17:06 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/13 14:25:08 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:40:11 by laubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	put_in_game(char *line, char **texture, char **fc, int index)
 		if (fc[index - 4])
 			free(fc[index - 4]);
 		fc[index - 4] = ft_strdup(line);
-
 	}
 	return (1);
 }
@@ -86,11 +85,35 @@ char	*file_to_tab(int fd, char **texture, char **fc)
 		i = add_in_tab(trim_line, texture, fc, &verif);
 		free(trim_line);
 		if (i == 0)
-			return (NULL);
+			return (free(line), NULL);
 		else if (verif < 6 && i == 2)
-			return (NULL);
+			return (free(line), NULL);
 		else if (i == 2)
 			break ;
 	}
 	return (line);
+}
+
+int	verif_255(char *fc[2])
+{
+	int		i;
+	int		value;
+	char	*token;
+
+	i = 0;
+	while (i < 2)
+	{
+		token = fc[i] + 2;
+		while (token)
+		{
+			value = ft_atoi(token);
+			if (value > 255)
+				return (0);
+			token = ft_strchr(token, ',');
+			if (token)
+				token++;
+		}
+		i++;
+	}
+	return (1);
 }

@@ -6,38 +6,48 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:17:54 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 23:59:43 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:58:17 by laubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	extract_color(char **rgb, uint8_t *color, int *color_index)
+{
+	char	color_str[16];
+	int		i;
+
+	i = 0;
+	while (**rgb == ' ' || **rgb == '\t')
+		(*rgb)++;
+	ft_bzero(color_str, sizeof(color_str));
+	while (is_number(**rgb))
+		color_str[i++] = *(*rgb)++;
+	if (**rgb != '\0' && **rgb != ',' && **rgb != ' ' && **rgb != '\t')
+		return (0);
+	color[*color_index] = (uint8_t)ft_atoi(color_str);
+	(*color_index)++;
+	if (**rgb == ',')
+		(*rgb)++;
+	return (1);
+}
+
 int	fc_to_tab(uint8_t *floor_cel, char **fc, int i)
 {
 	char	*rgb;
-	char	color[16];
-	int		int_tab[3];
+	int		color_index;
+	int		color_count;
 
-	bz(int_tab, 3);
+	color_index = 0;
+	color_count = 0;
 	rgb = ft_strchr(fc[i], ' ');
 	while (*rgb != '\0')
 	{
-		int_tab[0] = 0;
-		while (*rgb == ' ' || *rgb == '\t')
-			rgb++;
-		ft_bzero(color, ft_strlen(rgb) + 1);
-		while (is_number(*rgb))
-			color[int_tab[0]++] = *rgb++;
-		if (*rgb != '\0' && *rgb != ',' && *rgb != ' ' && *rgb != '\t')
+		if (!extract_color(&rgb, floor_cel, &color_index))
 			return (0);
-		floor_cel[int_tab[1]++] = (uint8_t)ft_atoi(color);
-		if (*rgb == ',' && int_tab[2] == 2)
-			return (0);
-		if (*rgb)
-			rgb++;
-		int_tab[2]++;
+		color_count++;
 	}
-	if (int_tab[2] != 3)
+	if (color_count != 3)
 		return (0);
 	return (1);
 }
@@ -64,30 +74,6 @@ int	verif_comma(char **fc)
 	return (1);
 }
 
-int	verif_255(char *fc[2])
-{
-	int		i;
-	int		value;
-	char	*token;
-
-	i = 0;
-	while (i < 2)
-	{
-		token = fc[i] + 2;
-		while (token)
-		{
-			value = ft_atoi(token);
-			if (value > 255)
-				return (0);
-			token = ft_strchr(token, ',');
-			if (token)
-				token++;
-		}
-		i++;
-	}
-	return (1);
-}
-
 int	select_fc(uint8_t *floor, uint8_t *ceiling, char **fc)
 {
 	char	*tmp[2];
@@ -99,17 +85,17 @@ int	select_fc(uint8_t *floor, uint8_t *ceiling, char **fc)
 	fc[1] = tmp[1];
 	if (!verif_comma(fc))
 	{
-		printf("%s\n", COMMA);
+		ft_error("%s\n", COMMA);
 		return (0);
 	}
 	if (!verif_255(fc))
 	{
-		printf("%s\n", ERROR_255);
+		ft_error("%s\n", ERROR_255);
 		return (0);
 	}
 	if (!fc_to_tab(floor, fc, 0) || !fc_to_tab(ceiling, fc, 1))
 	{
-		printf("%s\n", CHAR_RGB);
+		ft_error("%s\n", CHAR_RGB);
 		return (0);
 	}
 	return (1);

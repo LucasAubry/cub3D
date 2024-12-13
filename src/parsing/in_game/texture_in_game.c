@@ -6,66 +6,58 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:18:05 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/13 14:36:10 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:33:31 by laubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	verif_texture(char **texture)
+void	free_path(char **path, char *temp_path)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (i != 4)
+	while (path[i])
 	{
-		j = 2;
-		while (texture[i][j] != '\0')
-		{
-			if (texture[i][j] == '.' && texture[i][j + 1] == '/')
-				break ;
-			if (texture[i][j] != ' ' && texture[i][j] != '\t')
-				return (0);
-			j++;
-		}
-		if (texture[i][j] == '\0')
-			return (0);
+		free(path[i]);
 		i++;
 	}
-	return (1);
+	free(temp_path);
+	free(path);
 }
 
 char	**path_to_texture(char **texture)
 {
 	char	**path;
+	char	*temp_path;
 	int		i;
 
 	i = 0;
 	while (i != 4)
 	{
-		printf("texture[%d] : %s\n", i, texture[i]);
 		path = ft_split(texture[i], ' ');
-		path[1] = ft_strtrim(path[1], "\n");
-		if (path[1])
+		temp_path = ft_strtrim(path[1], "\n");
+		if (path[2])
+		{
+			free_path(path, temp_path);
+			return (NULL);
+		}
+		if (temp_path)
 		{
 			free(texture[i]);
-			texture[i] = ft_strdup(path[1]);
+			texture[i] = ft_strdup(temp_path);
 		}
+		free_path(path, temp_path);
 		i++;
 	}
-	i = 0;
-	while (path[i])
-		free(path[i++]);
-	free(path);
 	return (texture);
 }
 
 int	texture_in_game(t_game *game, char **texture)
 {
-	if (!verif_texture(texture))
-		return (0);
 	texture = path_to_texture(texture);
+	if (texture == NULL)
+		return (0);
 	game->textures.n = mlx_load_png(texture[0]);
 	game->textures.s = mlx_load_png(texture[1]);
 	game->textures.e = mlx_load_png(texture[2]);

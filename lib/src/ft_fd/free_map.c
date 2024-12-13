@@ -6,32 +6,20 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 22:19:21 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 22:01:38 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:41:18 by laubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	map_height(char **map)
-{
-	int	height;
-
-	height = 0;
-	while (map[height])
-		height++;
-	return (height);
-}
-
 void	free_map(char **map)
 {
 	int	i;
-	int	height;
 
+	i = 0;
 	if (!map)
 		return ;
-	height = map_height(map);
-	i = 0;
-	while (i < height)
+	while (map[i])
 	{
 		free(map[i]);
 		i++;

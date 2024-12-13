@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 02:36:36 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/12 05:31:35 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:56:39 by laubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,3 +236,4 @@ void				init_knife_animation(t_game *game, t_animation *anim,
 void				draw_animation(t_game *game, t_animation *anim);
 void				init_knife_frame(t_game *game, t_animation *anim,
 						char *path);
+int					verif_255(char *fc[2]);

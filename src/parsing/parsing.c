@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:16:51 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/11 23:56:18 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:57:02 by laubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,10 @@ int	check_map(t_game *game)
 int	parsing(t_game *game, char **argv)
 {
 	if (!file(argv))
-	{
-		printf("FILE\n");
 		return (0);
-	}
 	if (!map(game, argv))
-	{
-		printf("MAP\n");
 		return (0);
-	}
 	if (!check_map(game))
-	{
-		printf("VERIF_MAP\n");
 		return (0);
-	}
-	printf("pars OK\n");
 	return (1);
 }

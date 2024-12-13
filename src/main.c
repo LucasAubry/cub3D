@@ -6,36 +6,11 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:18:17 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/12 05:41:08 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:26:52 by laubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	print_result(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (game->map[i])
-	{
-		printf("%s\n", game->map[i]);
-		i++;
-	}
-	printf("\n");
-	printf("%u\n", game->floor_color.r);
-	printf("%u\n", game->floor_color.g);
-	printf("%u\n", game->floor_color.b);
-	printf("\n");
-	printf("%u\n", game->ceiling_color.r);
-	printf("%u\n", game->ceiling_color.g);
-	printf("%u\n", game->ceiling_color.b);
-	printf("\n");
-	printf("%p\n", (void *)game->textures.n);
-	printf("%p\n", (void *)game->textures.s);
-	printf("%p\n", (void *)game->textures.w);
-	printf("%p\n", (void *)game->textures.e);
-}
 
 int	set_mlx(t_game *game)
 {
@@ -120,25 +95,6 @@ void	handle_mouse(double xpos, double ypos, void *param)
 		* cos(angle);
 }
 
-// int	main(int argc, char **argv)
-// {
-// 	t_game	*game;
-
-// 	(void)argv;
-// 	(void)argc;
-// 	game = init_game();
-// 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
-// 	mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
-// 	mlx_cursor_hook(game->mlx, handle_mouse, game);
-// 	mlx_close_hook(game->mlx, (mlx_closefunc)free_game, game);
-// 	mlx_loop_hook(game->mlx, handle_input, game);
-// 	mlx_key_hook(game->mlx, animations, game);
-// 	mlx_loop(game->mlx);
-// 	mlx_terminate(game->mlx);
-// 	free(game);
-// 	return (0);
-// }
-
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -148,7 +104,6 @@ int	main(int argc, char **argv)
 		game = ft_calloc(1, sizeof(t_game));
 		if (!parsing(game, argv))
 		{
-			printf("MAIN PARSING");
 			free_parsing(game);
 			free(game);
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: dalebran <dalebran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 02:21:26 by dalebran          #+#    #+#             */
-/*   Updated: 2024/12/12 05:35:13 by dalebran         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:33:17 by laubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	free_anims(t_game *game)
 
 void	free_anims_tmp(t_game *game, int nb_anim, int nb_frame_init)
 {
-	printf("nb_anim : %d, nb_frames : %d\n", nb_anim, nb_frame_init);
 	if (nb_anim == 0)
 	{
 		free_anim(&game->rc_anim, nb_frame_init);
